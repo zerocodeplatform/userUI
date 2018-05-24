@@ -1,0 +1,5 @@
+<div class="checkbox" [formGroup]="formGroup">
+  <div class="ui-g-12">
+    <p-checkbox (onChange)="onChange($event)" formControlName="{{params.name}}" [name]="params.name" binary="true" [(ngModel)]="params.value" [label]="params.label"></p-checkbox>
+  </div>
+</div>

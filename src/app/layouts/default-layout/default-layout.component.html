@@ -1,0 +1,22 @@
+<!-- default-layout -->
+<div class="login-body" fxLayout="column" fxFill fxLayoutAlign="space-between stretch" >
+    <header fxFlex="90px" fxFlex.sm="55px" fxFlex.xs="55px" fxLayoutAlign="start center">
+        <div class="header-left" fxFlexOffset="25px" >
+            <a href="">
+            <img src="assets/images/logo.png" alt="Logo">
+            </a>
+        </div>
+    </header>
+    <div fxFlex class="default-content">
+        <router-outlet></router-outlet>
+    </div>
+    <footer fxFlex="50px" fxLayoutAlign="center center">
+        <div class="footer-center">
+            <a class="rights" href="http://www.thresholdsoft.com/">Threshold Software Solutions Pvt Ltd</a>, All Rights Reserved © 2018
+            <span class="powerby">
+                <span>Powered by </span>
+                <img src="assets/images/logo.png" alt="poweredBy">
+            </span>
+        </div>
+    </footer>
+</div>

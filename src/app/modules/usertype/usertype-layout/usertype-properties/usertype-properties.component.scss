@@ -1,0 +1,47 @@
+@import '../../../../config/theme.scss';
+.ui-panel{
+    .ui-panel-footer{
+        text-align: center;
+     }
+}
+.permission-table{
+    .ui-table-caption{
+        padding:$padding0;
+        border: $borderNone;
+    }
+    td{
+        width: 50px;
+        text-align: center;
+        color: $colorDefault2;
+        &:first-child{
+            width: auto;
+            text-align: left;
+        }
+    }
+}
+.permission-check{
+    background-color: $panelFooter;
+    padding: $padding10;
+}
+.permission-table{
+    background-color: $white;
+    padding: $padding15;
+}
+.permission-list{
+    padding: $padding15;
+    background-color: $white;
+    li{
+        border: 1px solid $border-color;
+        margin-bottom: $margin5;
+        border-radius: $br5;
+        >div{
+            text-align: center;
+            border-left: 1px solid $border-color;
+            padding: $padding5;
+            &:first-child{
+                border-left: $borderNone;
+                text-align: left;
+            }
+        }
+    }
+}

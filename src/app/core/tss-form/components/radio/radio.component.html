@@ -1,0 +1,21 @@
+<div class="select-container " [formGroup]="formGroup" fxLayout="column">
+  <label for="{{params.name}}">{{params.label}}</label>
+  <div class="radio-group-container" style="margin-left: 5px" fxLayout="row" fxLayoutWrap>
+    <!-- <p-radioButton class="radio" [value]='option' (onClick)="onClick($event)" [id]="params.name+'_'+i" [name]="params.name" [label]="option.value"
+      formControlName="{{params.name}}" *ngFor="let option of params.options;let i=index">
+    </p-radioButton> -->
+    <!-- <div *ngFor="let option of params.options;let i=index">
+      {{option.value}}
+      <input [id]="params.name+'_'+i" [checked]='params.value?.value==option.value' [name]="params.name" formControlName="{{params.name}}"
+        type="radio" [value]="option">
+    </div> -->
+    <mat-radio-group formControlName="{{params.name}}">
+      <mat-radio-button [id]="params.name+'_'+i" [checked]='params.value?.value==option.value' [name]="params.name" 
+        [value]="option" *ngFor="let option of params.options;let i=index">
+        {{option.label}}
+      </mat-radio-button>
+    </mat-radio-group>
+
+  </div>
+  <app-form-error-messages [formGroup]="formGroup" [control]="formGroup.controls[params.name]"></app-form-error-messages>
+</div>

@@ -1,0 +1,23 @@
+<button  *ngIf="btnLabel" (click)="btnClick()">{{btnLabel}}</button>
+<div>
+  <app-data-table *ngIf='styling && styling=="data-table"' [options]="options"></app-data-table>
+  <app-data-view *ngIf='styling && styling=="data-view"' [options]="options"></app-data-view>
+</div>
+<!-- <div>
+  <p-table [columns]="cols" [value]="rows">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns">
+          {{rowData[col.field]}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div> -->

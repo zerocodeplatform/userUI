@@ -1,0 +1,6 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <formly-form [model]="model" [fields]="fields" [options]="optionsState" [form]="form">
+    <button type="submit" class="btn btn-primary submit-button">{{options.buttonLabel || 'Submit'}}</button>
+    <button type="button" class="btn btn-default" (click)="optionsState.resetModel()">Reset</button>
+  </formly-form>
+</form>

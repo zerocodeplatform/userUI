@@ -1,0 +1,97 @@
+@import '../../../config/theme.scss';
+.ui-panel{
+    .ui-panel-footer{
+        text-align: center;
+     }
+}
+.operations-table{
+    margin-top: 10px;
+    &.ui-table .ui-table-thead > tr > th{
+        background: $white !important;
+    }
+    td{
+        width: 50px;
+        text-align: center;
+        color: $colorDefault2;
+        &:first-child{
+            width: auto;
+            text-align: left;
+        }
+    }
+}
+.applications-list{
+    ul{
+        li{
+            .list-widget{
+                background-color: #f9f9f9;
+                border: 1px solid $border-color;
+                border-radius: $borderRadius;
+                margin-bottom: 15px;
+                @media(min-width:1367px){
+                    margin-bottom: 30px;
+                }
+                @media(max-width:599px){
+                    margin-bottom: 15px;
+                }
+                cursor: pointer;
+                .list-info{
+                    padding: $padding5 $padding5 $padding5 $padding0;
+                    .left-icon{
+                        font-size: $fontSizeXXXL;
+                        @media(max-width:599px){
+                            font-size: $fontSizeXXL;
+                        }
+                    }
+                    h3{
+                        color: $primary;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical !important;
+                        -webkit-line-clamp: 1;
+                        overflow: hidden;
+                        // font-weight: $semi-bold;
+                        @media(max-width:599px){
+                            font-size: $fontSizeLarge;
+                        }
+                    }
+                    p{
+                        display: -webkit-box;
+                        -moz-box-orient: vertical;
+                        -webkit-box-orient: vertical !important;
+                        -webkit-line-clamp:3;
+                        overflow: hidden;
+                        min-height: 54px;
+                    }
+                }
+                .list-operations{
+                    padding: $padding5 $padding10;
+                    font-size: 18px;
+                    border-top:1px solid $border-color;
+                    span{
+                        border-right: 1px solid $border-color;
+                        cursor: pointer;
+                        outline: none;
+                        &:last-child{
+                            border-right: $borderNone;
+                        }
+                    }
+                }
+            }
+            &.active,&:hover{
+                .list-widget{
+                    background-color: #ffffff;
+                }
+            }
+            &:nth-of-type(odd){
+                .list-widget{
+                    margin-right: 15px;
+                    @media(min-width:1367px){
+                        margin-right: 30px;
+                    }
+                    @media(max-width:600px){
+                        margin-right: 0px;
+                    }
+                }
+            }
+        }
+    }
+}

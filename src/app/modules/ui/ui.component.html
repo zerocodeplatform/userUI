@@ -1,0 +1,26 @@
+<div class="p-contain">
+  <div class="ui-links">
+    <ul>
+      <li>
+        <a routerLink="dynamic-form" routerLinkActive="active">Dynamic Form</a>
+      </li>
+      <li>
+        <a routerLink="dynamic-component" routerLinkActive="active">dynamic-component</a>
+      </li>
+    </ul>
+  </div>
+  <div class="ui-content">
+    <router-outlet></router-outlet>
+  </div>
+  <p-table styleClass="language-table" [value]="cars" sortField="name" sortMode="single" (onSort)="onSort()">
+    <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+      <tr>
+        <td *ngIf="rowGroupMetadata[rowData.name].index === rowIndex" [attr.rowspan]="rowGroupMetadata[rowData.name].size">
+          {{rowData.name}}
+        </td>
+        <td>{{rowData.lang}}</td>
+        <td>{{rowData.description}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

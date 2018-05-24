@@ -1,0 +1,116 @@
+<div class="tab-btn" (click)="addEditUser('');">
+  <ul>
+    <li class="add-btn" >
+      <a href="javascript:;" [ngClass]="addUserModule?'formOpen':''">
+          <i class="icon-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+<div *ngIf="addUserModule">
+    <form [formGroup]="userTypeUserForm" (ngSubmit)="createOrUpdateUser(dt,userTypeUserForm.value)" novalidate>
+      <p-panel [showHeader]='false'>
+        <div fxLayout="row" fxLayout.xs="column" fxFill fxLayoutAlign="space-between none">
+          <div fxFlex="190px" fxFlex.xs="90px">
+            <div class="upload-icon" fxFlex="90" fxFlex.xs="90px">
+              <app-tss-file [params]="formData.img" [formGroup]="userTypeUserForm" fxFlex fxFlex.xs="90px"></app-tss-file>
+            </div>
+          </div>
+          <div fxFlex>
+            <div fxLayout="row" fxLayout.xs="column" fxFill fxLayoutAlign="start stretch" fxLayoutWrap >
+              <div class="flex-p" fxFlex="50" fxFlex.xs="100">
+                <app-tss-input [params]="formData.firstName" [formGroup]='userTypeUserForm'></app-tss-input>
+              </div>
+              <div class="flex-p" fxFlex="50" fxFlex.xs="100">
+                <app-tss-input [params]="formData.middleName" [formGroup]='userTypeUserForm'></app-tss-input>
+              </div>
+              <div class="flex-p" fxFlex="50" fxFlex.xs="100">
+                <app-tss-input [params]="formData.lastName" [formGroup]='userTypeUserForm'></app-tss-input>
+              </div>
+              <div class="flex-p" fxFlex="50" fxFlex.xs="100">
+                <app-tss-select [options]="saltuations"   [params]="formData.salutation" [formGroup]='userTypeUserForm'></app-tss-select>
+              </div>
+              <div class="flex-p" fxFlex="50" fxFlex.xs="100">
+                <app-tss-date [params]="formData.dob" [formGroup]='userTypeUserForm'></app-tss-date>
+              </div>
+              <div class="flex-p" fxFlex="50" fxFlex.xs="100">
+                <app-tss-select [options]="genders"   [params]="formData.gender" [formGroup]='userTypeUserForm'></app-tss-select>
+              </div>  
+              <div class="flex-p" fxFlex="50" fxFlex.xs="100">
+                <app-tss-input [params]="formData.email" [formGroup]='userTypeUserForm'></app-tss-input>
+              </div>
+              <div class="flex-p" fxFlex="50" fxFlex.xs="100">
+                <app-tss-input [params]="formData.phone" [formGroup]='userTypeUserForm'></app-tss-input>
+              </div>
+              <div class="flex-p" fxFlex="50" fxFlex.xs="100">
+                <app-tss-input [params]="formData.loginUnique" [formGroup]='userTypeUserForm'></app-tss-input>
+              </div>
+              <div class="flex-p" fxFlex="50" fxFlex.xs="100">
+                  <app-tss-select *ngIf="roles.length>0" [options]="roles" [params]="formData.role" [formGroup]='userTypeUserForm' (change)="getReportingToList($event.value.value,userTypeUserForm.value.uid)"></app-tss-select>
+              </div>
+              <div class="flex-p" fxFlex="50" fxFlex.xs="100">
+                  <app-tss-select [options]="reportingTos" [params]="formData.reportsTo" [formGroup]='userTypeUserForm'></app-tss-select>
+              </div>                                       
+            </div>
+          </div>
+        </div>
+        <p-footer fxLayoutAlign="center center" fxLayoutGap="5px">
+          <button type="submit" pButton label="{{submitButtonLabel}}" class="ui-button"></button>
+          <button type="button" pButton label="CANCEL" class="ui-button-secondary" (click)="addUserModule=!addUserModule"></button>
+        </p-footer>
+      </p-panel>
+    </form>
+</div>
+<p-table #dt styleClass="user-table" [paginator]="true"  [lazy]="true" (onLazyLoad)="getUsersList($event)"
+          [rows]="rows" [totalRecords]="totalRecords" [responsive]="true" [value]="usersData">
+  <ng-template pTemplate="caption">
+    <div class="table-search">        
+      <i class="fa fa-search"></i>
+      <input type="text" pInputText size="50" placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')">
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns="cols">
+      <tr>
+          <th *ngFor="let col of cols"  [pSortableColumn]="col.field">
+              {{col.header}}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+          <th colspan="3" class="action-icon-th">Actions</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="cols">
+      <tr>
+          <td *ngFor="let col of cols" [ngClass]="col.class">
+              <span class="ui-column-title">{{col.header}}</span>
+              <span  class="ellipsis-1" [ngSwitch]="col.field">
+                <span matTooltip="{{rowData['salutation']['label']}} {{rowData['name']}}" matTooltipPosition="above" *ngSwitchCase="'name'">
+                  {{rowData['salutation']['label']}} {{rowData['name']}}
+                </span>
+                <span matTooltip="{{rowData['reportsToSalutation']?.label}} {{rowData['reportsTo']?.label}}" matTooltipPosition="above" *ngSwitchCase="'reportsTo'">
+                  {{rowData['reportsToSalutation']?.label}} {{rowData['reportsTo']?.label}}
+                </span>
+                <span matTooltip="{{rowData['dob'] | date:'dd-MM-yyyy'}}" matTooltipPosition="above" *ngSwitchCase="'dob'" class="table-date-fld">
+                    {{rowData['dob'] | date:'dd-MM-yyyy'}} 
+                </span>
+                <span matTooltip="{{rowData['gender']['label']}}" matTooltipPosition="above" *ngSwitchCase="'gender'">
+                  {{rowData['gender']?.label}}
+                </span>
+                <span matTooltip="{{rowData['role']?.label}}" matTooltipPosition="above" *ngSwitchCase="'role'">
+                  {{rowData['role']?.label}}
+                </span>
+                <span style="word-wrap:break-word;" matTooltip="{{rowData[col.field]}}" matTooltipPosition="above" *ngSwitchDefault>{{rowData[col.field]}}</span>
+              </span>
+          </td>
+          <td class="action-icon-td" ><mat-slide-toggle [checked]="rowData['status']" [color]="rowData['status']?primary:warn" (change)="updateUserStatus(rowData, $event)" matTooltip="Status" matTooltipPosition="above"></mat-slide-toggle></td>
+          <td class="action-icon-td"><a class="fa fa-edit" (click)="addEditUser(rowData.uid);" matTooltip="Edit" matTooltipPosition="above"></a></td>
+          <td class="action-icon-td"><a class="fa fa-trash" (click)="deleteUser(dt,rowData);" matTooltip="Delete" matTooltipPosition="above"></a></td>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+      <tr>
+          <td [attr.colspan]="cols.length+3" class="text-align-center">
+              No users found
+          </td>
+      </tr>
+  </ng-template>
+</p-table>

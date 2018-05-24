@@ -1,0 +1,189 @@
+<div class="tab-btn">
+  <ul>
+    <li class="add-btn" (click)="gotoApplicationList()">
+      <a class="formOpen" href="javascript:;" matTooltip="Close" matTooltipPosition="left">
+        <i class="icon-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="app-create-widget" style="position:relative;">
+  <mat-tab-group dynamicHeight="true">
+    <mat-tab label="Properties">
+      <ng-template mat-tab-label>
+        <i class="icon-properties"></i>
+        <span>Properties</span>
+      </ng-template>
+      <p-panel [showHeader]='false'>
+        <form [formGroup]="appCreateForm" novalidate (ngSubmit)="saveUpdateApp(appCreateForm.value,appCreateForm.valid)">
+          <div class="app-form" fxLayout="row" fxLayout.xs="column" fxFill fxLayoutAlign="space-between none">
+            <div fxFlex="190px" fxFlex.xs="90px">
+              <div class="upload-icon" fxFlex="90" fxFlex.xs="90px">
+                <app-icon-picker formControlName="icon"></app-icon-picker>
+              </div>
+            </div>
+            <div fxFlex>
+              <div fxLayout="column" fxFill fxLayoutAlign="start none">
+                <app-tss-input [params]="formData.name" [formGroup]='appCreateForm'></app-tss-input>
+                <app-tss-input [params]="formData.url " [formGroup]='appCreateForm'></app-tss-input>
+                <app-tss-select [options]="themeOptions" [params]="formData.applicationTheme" [formGroup]='appCreateForm'></app-tss-select>
+                <app-tss-textarea [params]="formData.description" [formGroup]='appCreateForm'></app-tss-textarea>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="column" fxLayout.xs="column" fxFill fxLayoutAlign="center center">
+            <div fxFlex="50px" fxLayout="row" fxLayoutAlign="center center">
+              <button type="submit" pButton label="{{buttonLabel}}" class="ui-button"></button>
+              <button type="button" pButton label="CANCEL" (click)="gotoApplicationList()" class="ui-button-secondary"></button>
+            </div>
+          </div>
+          <!-- <p-footer fxFlex style="text-align:center;" fxLayoutAlign="center center" fxLayoutGap="5px">
+              <button type="submit" pButton label="{{buttonLabel}}" class="ui-button"></button>
+              <button type="button" pButton label="CANCEL" class="ui-button-secondary"></button>
+            </p-footer> -->
+        </form>
+        <div *ngIf='addEditFlag'>
+          <div class="white-tabs">
+            <mat-tab-group dynamicHeight="true" (selectedTabChange)="onTabChange($event)">
+              <mat-tab label="Access Permissions">
+                <ng-template mat-tab-label>
+                  <span>Access Permissions</span>
+                </ng-template>
+                <div fxLayout="row" fxFill fxLayout.xs="column" fxLayout.lt-md="column" fxLayoutAlign="start stretch">
+                  <div fxFlex="50%" fxFlex.xs="100%">
+                    <div fxFlex class="application-create">
+                      <ul>
+                        <li class="" [ngClass]="(activeClassIndex===inx)?'active':''" *ngFor="let accessUserType of accessUserTypes let inx = index"
+                          (click)="onUserTypeSelect(accessUserType, inx)">
+                          <div class="list-widget" fxLayout="column">
+                            <div class="list-info" fxLayout="row" fxLayoutAlign="start center">
+                              <div fxFlex>
+                                <h3>{{accessUserType.name}}</h3>
+                                <p style="-webkit-box-orient: vertical;">
+                                  {{accessUserType.description}}
+                                </p>
+                              </div>
+                              <span fxFlex="100px" fxLayoutAlign="center center">
+                                <mat-slide-toggle [checked]="accessUserType['access']" [color]="accessUserType['access']?primary:warn" matTooltip="Access"
+                                  matTooltipPosition="above"></mat-slide-toggle>
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div fxFlex="50%" fxFill fxFlex.xs="100%">
+                    <p-table styleClass="roles-table no-borders" [value]="accessRoles" [responsive]="false" [scrollable]="true" scrollHeight="300px">
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th style="border-right:none;">Roles</th>
+                          <th style="width:70px;border-left:0px;">Access</th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-role>
+                        <tr>
+                          <td style="border-right:none;">{{role.name}}</td>
+                          <td style="width:70px;text-align:center;border-left:0px;">
+                            <!-- (change)="updateAccessRoleStatus(role, $event)"  -->
+                            <div class="switch-height">
+                              <mat-slide-toggle [checked]="role['access']" (change)="updateAccessRoleStatus(role, $event)" [color]="role['access']?primary:warn"
+                                matTooltip="Access" matTooltipPosition="above"></mat-slide-toggle>
+                            </div>
+                          </td>
+                        </tr>
+                      </ng-template>
+                    </p-table>
+                    <div fxLayout="column" fxLayoutAlign="center center">
+                      <div fxFlex="50px" fxLayout="row" fxLayoutAlign="center center">
+                        <button type="buttom" (click)="updateAccessRole()" pButton label="Update" class="ui-button"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Filters">
+                <ng-template mat-tab-label>
+                  <span>Filters</span>
+                </ng-template>
+                Filters
+              </mat-tab>
+              <mat-tab label="Language" *ngIf='languageUrl'>
+                <ng-template mat-tab-label>
+                  <span>Language</span>
+                </ng-template>
+                <app-language-config *ngIf='languageUrl' [url]='languageUrl'></app-language-config>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+          <div class="permission-checkbox" fxLayout="column" fxLayoutAlign="center start">
+            <p-checkbox name="group1" value="New York" label="Advanced Access Permissions"></p-checkbox>
+            <span style="padding-left:30px;font-size:12px;">the includes to or the excludes from the primary permissions can be defined by enabling this feature.</span>
+          </div>
+          <div class="dataset-dps" fxLayout="column">
+            <form [formGroup]="dataSetForm" novalidate>
+              <div fxLayout="row" fxFill fxLayoutAlign="start none" fxLayoutGap="10px">
+                <div fxFlex="20">
+                  <app-tss-select [options]="datasetDropdown" [params]="formData2.dataset" [formGroup]='dataSetForm'></app-tss-select>
+                </div>
+                <div fxFlex>
+                  <app-tss-input [params]="formData2.dvalue" [formGroup]='dataSetForm'></app-tss-input>
+                </div>
+                <div fxFlex="30" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="5px">
+                  <app-tss-input [params]="formData2.include" [formGroup]='dataSetForm'></app-tss-input>
+                  <button pButton label="ADD"></button>
+                </div>
+              </div>
+            </form>
+            <div class="include-exclude" fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="40px">
+              <p-table styleClass="roles-table" [value]="roles" [responsive]="false">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Includes</th>
+                    <th style="width:100px;border-left:0px;"></th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-role>
+                  <tr>
+                    <td style="border-right:none;">{{role.name}}</td>
+                    <td style="width:100px;text-align:center;border-left:0px;">
+                      <a class="fa fa-pencil"></a>
+                      <a class="fa fa-trash"></a>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+              <p-table styleClass="roles-table" [value]="roles" [responsive]="false">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Excludes</th>
+                    <th style="width:100px;border-left:0px;"></th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-role>
+                  <tr>
+                    <td style="border-right:none;">{{role.name}}</td>
+                    <td style="width:100px;text-align:center;border-left:0px;">
+                      <a class="fa fa-pencil"></a>
+                      <a class="fa fa-trash"></a>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+          <p-footer fxLayoutAlign="center center">
+            <button type="submit" pButton label="{{buttonLabel}}" class="ui-button"></button>
+            <button type="button" pButton label="CANCEL" (click)="gotoApplicationList()" class="ui-button-secondary"></button>
+          </p-footer>
+        </div>
+      </p-panel>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<p-confirmDialog width="425" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="Cancel" class="ui-button-secondary" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" class="ui-button-success" label="Yes" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>

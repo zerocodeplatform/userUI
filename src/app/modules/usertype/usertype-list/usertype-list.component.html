@@ -1,0 +1,43 @@
+<div class="p-contain">
+  <div class="head-btn">
+    <ul>
+      <li class="add-btn" (click)="addEditUserType('');">
+        <a class="" href="javascript:;" [ngClass]="isUserFormActive?'formOpen':''" matTooltip="{{isUserFormActive?'Close':'Add'}}" matTooltipPosition="left">
+          <i class="fa icon-plus"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="isUserFormActive">
+    <app-usertype-properties [userdata]="selectedData" [submitButtonLabel]="submitButtonLabelText" (cancelCallBack)="isUserFormActive = $event"
+      (afterSave)="afterSaveCallback($event)" [hideCancelButton]='false'></app-usertype-properties>
+  </div>
+  <div class="applications-list">
+    <ul fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" fxLayoutWrap dnd-sortable-container>
+      <li class="active" fxFlex="50%" fxFlex.xs="100%" [class.active]="(indx === selectedIndex)" *ngFor="let userType of userTypeList; let indx = index"
+        (click)="selectedIndex = indx">
+        <div class="list-widget" fxLayout="column">
+          <div class="list-info" fxLayout="row" fxLayoutAlign="start center">
+            <span fxFlex="100px" fxFlex.xs="60px" class="fa left-icon" [ngClass]="(userType.icon)?userType.icon:'fa-cog'" fxLayoutAlign="center center"></span>
+            <div fxFlex>
+              <h3 style="-webkit-box-orient: vertical;"><span  matTooltip="{{userType.name}}" matTooltipPosition="above">{{userType.name}}</span></h3>
+              <p style="-webkit-box-orient: vertical;" matTooltip="{{(userType.description)?userType.description:'---'}}" matTooltipPosition="above">{{(userType.description)?userType.description:'---'}}</p>
+            </div>
+          </div>
+          <div class="list-operations" fxLayout="row" fxLayoutAlign="start center">
+            <span fxFlex="33" class="fa fa-eye" fxLayoutAlign="center center" [routerLink]="[userType.uid + '/' + userType.name + '/Properties']"  matTooltip="View" matTooltipPosition="above"></span>
+            <span fxFlex="33" class="fa fa-star" [style.color]="(userType.status)?'#10b1dc':'#72848c'" fxLayoutAlign="center center" (click)="changeStatus(userType)" matTooltip="Status" matTooltipPosition="above"></span>
+            <span fxFlex="33" class="fa icon-edit" fxLayoutAlign="center center" (click)="addEditUserType(userType.uid);" matTooltip="Edit" matTooltipPosition="above"></span>
+            <span fxFlex="33" class="fa icon-delete" fxLayoutAlign="center center" (click)="deleteUserType(userType)" matTooltip="Delete" matTooltipPosition="above"></span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <p-confirmDialog width="425" #cd>
+    <p-footer>
+      <button type="button" pButton icon="fa-close" label="Cancel" class="ui-button-secondary" (click)="cd.reject()"></button>
+      <button type="button" pButton icon="fa-check" class="ui-button-success" label="Yes" (click)="cd.accept()"></button>
+    </p-footer>
+  </p-confirmDialog>
+</div>

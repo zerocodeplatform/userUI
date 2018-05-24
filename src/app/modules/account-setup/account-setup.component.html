@@ -1,0 +1,91 @@
+<!-- <div class="new-application" fxLayout="row" fxLayoutAlign="center center">
+  <div fxLayout="column" fxFlex="70" fxFlex.sm="100" fxFlex.xs="100" fxLayoutAlign="center center">
+    <h1>Hello User! Welcome to zerocode</h1>
+    <h1 style="color:#7d8fa5;">Let's get started by setting up a new application</h1>
+    <p-panel styleClass="new-application-panel" fxFill>
+      <p-header>
+        New Application
+      </p-header>
+      <form class="form-application">
+        <div fxLayout="column">
+          <div fxLayout="row">
+            <div fxFlex>
+              <div class="first-fields" fxLayout="column" fxLayoutAlign="end stretch">
+                <div fxFlex>
+                  <label>Application Name</label>
+                  <input type="text" size="30" pInputText>
+                </div>
+                <div fxFlex>
+                  <label>Application Url</label>
+                  <input type="url" size="30" pInputText>
+                </div>
+              </div>
+            </div>
+            <div fxFlex="33">
+              <label>Application Logo</label>
+              <div class="application-logo">
+                <p-fileUpload mode="basic" name="demo" url="null" (onUpload)="onBasicUpload($event)" accept="image/*" maxFileSize="1000000" >
+                  <ng-template let-file pTemplate="file">
+                      <ul *ngIf="uploadedFiles.length">
+                          <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                      </ul>
+                  </ng-template>      
+                  
+                </p-fileUpload>
+              </div>
+            </div>
+          </div>
+          <div class="desc" fxFlex>
+            <label>Description</label>
+            <textarea [rows]="5" pInputTextarea></textarea>
+          </div>
+          <div fxFlex style="text-align:center;">
+            <button pButton type="button" label="Create New Application" class="ui-button-secondary"></button>
+          </div>
+        </div>
+
+      </form>
+    </p-panel>
+  </div>
+</div> -->
+
+<mat-tab-group>
+  <mat-tab label="">
+    <ng-template mat-tab-label>
+      <i class="fa fa-bold"></i>
+      <span>Basic</span>
+    </ng-template>
+    <form [formGroup]="accountForm" (ngSubmit)="saveBasicConfig(accountForm.value,accountForm.valid)" novalidate>
+      <p-panel [showHeader]='false'>
+        <div fxLayout="row" fxLayout.xs="column" fxFill fxLayoutAlign="space-between none" fxLayoutGap="20px">
+          <div fxFlex="190px" fxFlex.xs="90px">
+            <app-tss-file [params]="formData.logo" [formGroup]="accountForm" fxFlex fxFlex.xs="90px"></app-tss-file>
+            <!-- <app-icon-picker formControlName="icon"></app-icon-picker> -->
+          </div>
+          <div fxFlex>
+            <div fxLayout="column" fxFill fxLayoutAlign="start none">
+              <app-tss-input [params]="formData.name" [formGroup]="accountForm"></app-tss-input>
+              <app-tss-input [params]="formData.url" [formGroup]="accountForm"></app-tss-input>
+              <app-tss-textarea [rows]="5" [cols]="30" [params]="formData.description" [formGroup]="accountForm"></app-tss-textarea>
+              <!-- <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
+              <div class="ui-float-label">
+                  <textarea id="float-input" [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
+                  <label for="float-input">Description</label>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <p-footer style="text-align:center;" fxLayoutAlign="center center">
+          <button type="submit" pButton label="UPDATE" class="ui-button"></button>
+        </p-footer>
+      </p-panel>
+    </form>
+  </mat-tab>
+  <mat-tab label="">
+    <ng-template mat-tab-label>
+      <i class="fa fa-adn"></i>
+      <span>Advanced</span>
+    </ng-template>
+    <app-account-advanced-setup></app-account-advanced-setup>
+  </mat-tab>
+</mat-tab-group>

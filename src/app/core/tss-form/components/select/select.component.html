@@ -1,0 +1,6 @@
+<div class="select-container ui-float-label" [formGroup]="formGroup">
+    <p-dropdown dataKey='value' (onChange)="onChange($event)" [style]="{'width':'100%'}" id="{{params.name}}" [optionLabel]='optionLabel'
+        [options]="options" placeholder="&nbsp;" formControlName="{{params.name}}" filter="true"></p-dropdown>
+    <label for="{{params.name}}">{{params.label}}</label>
+    <app-form-error-messages [formGroup]="formGroup" [control]="formGroup.controls[params.name]"></app-form-error-messages>
+</div>

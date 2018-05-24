@@ -1,0 +1,59 @@
+@import '../../config/theme.scss';
+header{
+    background-color: $white;
+    .header-left{
+        display: inline-block;
+        padding: 0 10px;
+    }
+}
+.login-body{
+    .default-content{
+        background-image: url("../../../assets/images/login-bg.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        input{
+            &.ng-dirty.ng-invalid{
+                border: 1px solid #f00;
+            }
+        }
+    }
+    
+}
+footer{
+    background-color: #171a1e;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 70px;
+    font-size: 13px;
+    .footer-center{
+        color: #fff;
+        text-align: center;
+        @media(max-width:1024px){
+            text-align: left;
+        }
+        @media(max-width:768px){
+            padding: 10px;
+        }
+        .rights{
+            color: #76b6f7;
+        }
+        .powerby{
+            float: right;
+            position: absolute;
+            right: 5px;
+            top:14px;
+            @media(max-width:768px){
+                position: relative;
+                top:5px;
+            }
+            span{
+                right: 14px;
+                float: left;
+                padding-top: 4px;
+                padding-right: 5px;
+            }
+        }
+    }
+}

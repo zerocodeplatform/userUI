@@ -1,0 +1,22 @@
+<div [ngStyle]="{'border-width':(block.options.isBorder)?block.options.borderWidth:'none','border-color':(block.options.isBorder)?block.options.borderColor:'none','border-style':(block.options.isBorder)?block.options.borderStyle:'none', 'background-color': block.options.backgroundColor,'padding':block.options.padding,'margin':block.options.margin}"
+  class="blockDiv drop-here {{block.options.class}} {{block.options.blockWidth.lg}}" (onDropSuccess)="onBlockDropSuccess($event,block)"
+  dnd-droppable *ngFor="let block of pageBlocks;let bIndx=index;">
+  <div class="setting">
+    {{block.options.blockName}}
+    <i class="fa icon-settings" (click)="blockClik(block)"></i>
+    <i class="fa fa-trash" (click)="delete(pageBlocks,bIndx)"></i>
+  </div>
+  <div *ngFor="let c of block.child;let indx=index">
+    <div *ngIf="c.type=='block'">
+      <app-block-tree-node [pageBlocks]="c.data"></app-block-tree-node>
+    </div>
+    <div *ngIf="c.type !='block'">
+      <div class="c-setting">
+        {{c.type}}
+        <i class="fa icon-settings" (click)="blockClik(c)"></i>
+        <i class="fa fa-trash" (click)="delete(block.child,indx)"></i>
+      </div>
+      <app-com-render [data]="c"></app-com-render>
+    </div>
+  </div>
+</div>

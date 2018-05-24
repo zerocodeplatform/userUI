@@ -1,0 +1,22 @@
+<form [formGroup]="usertypeForm" (ngSubmit)="saveUserType(usertypeForm.valid, usertypeForm.value)" novalidate>
+  <p-panel [showHeader]='false'>
+    <div fxLayout="row"  fxLayout.xs="column" fxFill fxLayoutAlign="space-between none">
+      <div fxFlex="190px" fxFlex.xs="90px">
+        <div class="upload-icon" fxFlex="90" fxFlex.xs="90px">
+          <app-icon-picker formControlName="icon"></app-icon-picker>
+        </div>
+      </div>
+      <div fxFlex>
+        <div fxLayout="column" fxFill fxLayoutAlign="start none">
+          <app-tss-input [params]="formData.name" [formGroup]='usertypeForm'></app-tss-input>
+          <app-tss-input *ngIf="!userdata?.uid" [params]="formData.entityName" [formGroup]='usertypeForm'></app-tss-input>
+          <app-tss-textarea [params]="formData.description" [formGroup]='usertypeForm'></app-tss-textarea>
+        </div>
+      </div>
+    </div>
+    <p-footer [style]="{'float':'right'}" style="text-align:center;">
+      <button type="submit" pButton label="{{submitButtonLabel}}" class="ui-button"></button>
+      <button *ngIf="!hideCancelButton" type="button" pButton label="CANCEL" class="ui-button-secondary" (click)="cancelCallbackFunction()"></button>
+    </p-footer>
+  </p-panel>
+</form>

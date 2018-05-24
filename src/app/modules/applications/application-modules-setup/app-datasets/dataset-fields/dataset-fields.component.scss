@@ -1,0 +1,169 @@
+@import '../../../../../config/theme.scss';
+.fields-widget{
+    border: 1px solid $border-color;
+    background-color: $white;
+    border-radius: $br5;
+    .fields-elements{
+        border-right: 1px solid $border-color;
+        height: calc(100vh - 235px);
+        // padding: $padding15;
+        background-color: #fdfdfd;
+        .top-widgets{
+            >div{
+                padding: 10px 20px;
+                background-color: #f7f9fb;
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 19px;
+                &:hover,&.active{
+                    background-color: $white;
+                    color: $ternary;
+                }
+            }
+        }
+        ul{
+            padding: $padding20;
+            overflow: auto;
+            li{
+                // cursor: pointer;
+                width: 100%;
+                a{
+                    border-radius: 3px;
+                    cursor: pointer;
+                    padding: $padding10;
+                    display: block;
+                    background-color: $white;
+                    border: 1px solid $textfield-border2;
+                    margin-bottom: $margin5;
+                    transition: .2s;
+                    i{
+                        color:$ternary;
+                    }
+                    &:hover{
+                        background-color: #f8f9fb;
+                    }
+                }
+                &:hover{
+                    a{
+                        transform: scale(1.1);
+                        
+                    }
+                }
+            }
+        }
+        
+    }
+    .basic-info-fields{
+       padding: $padding20;
+       height: calc(100vh - 235px);
+        .actions{
+            text-align: right;
+            a{
+                padding: $padding5;
+                color: $main-color;
+            }
+        }
+        .fields-elements-list{
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 15px;
+            .entity-list{
+                li{
+                    border-radius: $br5;
+                    padding: $padding8;
+                    position: relative;
+                    .entity-widget{
+                        border: 1px dashed #c6c6c6;
+                        border-radius: $br5;
+                       a{
+                        border-left: 1px solid #c6c6c6;
+                        background-color: $white;
+                        color: #999;
+                        padding: $padding10 $padding5;
+                        text-align: center;
+                        &:first-child{
+                            background-color: $backgroundColor;
+                            color: $ternary;
+                            border-left: $borderNone;
+                            border-top-left-radius: $br5;
+                            border-bottom-left-radius: $br5;
+                        }
+                        &:last-child{
+                            border-top-right-radius: $br5;
+                            border-bottom-right-radius: $br5;
+                        }
+                       }
+                        span{
+                            background-color: $white;
+                            border-left: 1px solid #c6c6c6;
+                            color: #323232;
+                            padding: $padding10 $padding5;
+                            font-size: $fontSizeSmall;
+                            &.mandatory{
+                                color: $ternary;
+                                font-size: $fontSizeSmall - 2px;
+                                padding-top: $padding10 + 1px;
+                            }
+                        }
+                        &.error-entity{
+                            border: 1px dashed #ff888c;
+                            a{
+                                border-left: 1px solid #ff888c;
+                                background-color: $white;
+                                color: #fa0504;
+                                &:first-child{
+                                    background-color: #f59678;
+                                    color: #fff;
+                                }
+                            }
+                            span{
+                                border-left: 1px solid #ff888c;
+                                color: #fa0504;
+                                &.mandatory{
+                                    color: #fa0504;
+                                }
+                            }
+                        }
+                    }
+                    &.active,&:hover{
+                        background-color: #f2f2f2;
+                        &:before{
+                            border-top:10px solid transparent;
+                            border-bottom:10px solid transparent;
+                            border-left:15px solid #f2f2f2;
+                            content: "";
+                            display: block;
+                            right: -15px;
+                            top:15px;
+                            position: absolute;
+                        }
+                    }
+                }
+            }
+        }
+        
+        .fields-form-widget{
+            padding-left: $padding15;
+            overflow-y: auto;
+            .fields-form{
+                background: #fbfbfb !important;
+            }
+        }
+        .ui-state-highlight{
+            background-color: $primary !important;
+            border-radius: 5px;
+        }
+    }
+
+}
+.essential-switches{
+    border: 1px solid $textfield-border;
+    margin-bottom: $margin10 !important;
+    div{
+        padding: $padding15;
+        &:nth-child(2){
+            border-left: 1px solid $textfield-border;
+            border-right: 1px solid $textfield-border;
+        }
+    }
+}

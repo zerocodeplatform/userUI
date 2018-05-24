@@ -1,0 +1,33 @@
+<div class="tab-btn" *ngIf="datasetType !== '0'">
+  <ul>
+    <li class="add-btn" >
+      <a class="formOpen" (click)="gotoDataSet()">
+        <i class="icon-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+<div>
+  <form [formGroup]="datasetFormGroup" (ngSubmit)="createOrUpdateDataset(datasetFormGroup.value, datasetFormGroup.valid)" novalidate>
+    <p-panel [style]="{'margin-bottom':'20px'}" [showHeader]='false' href="#addForm">
+      <div fxLayout="row" fxLayout.xs="column" fxFill fxLayoutAlign="space-between none">
+        <div fxFlex="190px" fxFlex.xs="90px">
+          <div class="upload-icon" fxFlex="90" fxFlex.xs="90px">
+            <app-icon-picker formControlName="icon"></app-icon-picker>
+          </div>
+        </div>
+        <div fxFlex>
+          <div fxLayout="column" fxFill fxLayoutAlign="start none">
+            <app-tss-input [params]='formData.name' [formGroup]="datasetFormGroup"></app-tss-input>
+            <app-tss-input *ngIf="datasetUid === 0" [params]='formData.entityName' [formGroup]="datasetFormGroup"></app-tss-input>
+            <app-tss-textarea [params]='formData.description' [formGroup]="datasetFormGroup"></app-tss-textarea>
+          </div>
+        </div>
+      </div>
+      <p-footer fxFlex style="text-align:center;" fxLayoutAlign="center center" fxLayoutGap="5px">
+        <button type="submit" pButton label="{{buttonLabel}}" class="ui-button"></button>
+        <!-- <button type="button" pButton label="CANCEL" class="ui-button-secondary" (click)="gotoDataSet()"></button> -->
+      </p-footer>
+    </p-panel>
+  </form>
+<div>

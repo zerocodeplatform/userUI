@@ -1,0 +1,40 @@
+<div class="flex" style="position:relative;">
+  <mat-tab-group dynamicHeight="true" [(selectedIndex)]="activeTab" (selectedTabChange)="tabChanged($event)">
+    <mat-tab label="Properties">
+      <ng-template mat-tab-label>
+        <i class="fa icon-properties"></i>
+        <span>Properties</span>
+      </ng-template>
+      <app-usertype-properties [userdata]="selectedData" *ngIf="activeTab===0"
+        [submitButtonLabel]="submitButtonLabelText" 
+        (cancelCallBack)="addModule = $event" (afterSave)="afterSaveCallback($event)" [hideCancelButton]='true'></app-usertype-properties>
+    </mat-tab>
+    <mat-tab label="Roles">
+        <ng-template mat-tab-label>
+          <i class="fa icon-roles"></i>
+          <span>Roles</span>
+        </ng-template>
+      <app-usertype-roles *ngIf="activeTab===1"></app-usertype-roles>
+    </mat-tab>
+    <mat-tab label="Departments">
+        <ng-template mat-tab-label>
+          <i class="fa fa-building"></i>
+          <span>Departments</span>
+        </ng-template>
+      <app-usertype-department *ngIf="activeTab===2"></app-usertype-department>
+    </mat-tab>
+    <mat-tab label="Users">
+        <ng-template mat-tab-label>
+          <i class="fa icon-users"></i>
+          <span>Users</span>
+        </ng-template>
+      <app-usertype-users *ngIf="activeTab===3"></app-usertype-users>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<p-confirmDialog width="425" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="Cancel" class="ui-button-secondary" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" class="ui-button-success" label="Yes" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>

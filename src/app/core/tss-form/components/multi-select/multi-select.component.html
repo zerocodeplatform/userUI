@@ -1,0 +1,6 @@
+<div class="select-container ui-float-label" [formGroup]="formGroup">
+    <p-multiSelect  dataKey='value' (onChange)="onChange($event)" [options]="options" [panelStyle]="{minWidth:'12em'}"
+        placeholder="&nbsp;" id="{{params.name}}" [optionLabel]='optionLabel' formControlName="{{params.name}}"></p-multiSelect>
+    <label for="{{params.name}}">{{params.label}}</label>
+    <app-form-error-messages [formGroup]="formGroup" [control]="formGroup.controls[params.name]"></app-form-error-messages>
+</div>

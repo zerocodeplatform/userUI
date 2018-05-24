@@ -1,0 +1,12 @@
+<div class="upload-logo" [formGroup]="formGroup">
+    <p-fileUpload withCredentials="true" (onBeforeUpload)="onBeforeUpload($event)" accept="image/*" [url]="fileUploadUrl" name="file" [chooseLabel]="'Upload Logo'" title="{{imagePath.name}}"
+        auto="auto" (onUpload)="onUpload($event)"></p-fileUpload>
+    <div class="display-image" *ngIf='imagePath'>
+        <img width="100%" height="100%" [src]="imagePath"/>
+    </div>
+    
+    <div class="upload-loader" *ngIf="logoSpinner">
+        <p-progressSpinner  [style]="{width: '50px', height: '50px'}" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
+    </div>
+</div>
+<button  *ngIf='imagePath' pButton icon="fa fa-fw fa-trash" class="ui-button-danger" (click)="deleteLogo(imagePath)" style="float:right;margin-top:3px;"></button>

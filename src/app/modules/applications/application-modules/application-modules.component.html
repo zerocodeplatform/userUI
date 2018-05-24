@@ -1,0 +1,163 @@
+<div class="p-contain">
+  <div class="head-btn">
+    <ul>
+      <li class="add-btn" (click)="createEditModule('');" *ngIf="moduleList.length!==0">
+        <a class="" href="javascript:;" [ngClass]="flagAddModule?'formOpen':''" matTooltip="{{flagAddModule?'Close':'Add'}}" matTooltipPosition="left">
+          <i class="icon-plus"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="no-record" *ngIf="moduleList.length===0">
+    Create your first module setup
+  </div>
+  <div *ngIf="flagAddModule">
+    <!-- #target -->
+    <form [formGroup]="moduleFormGroup" (ngSubmit)="saveUpdateModule(moduleFormGroup.value)" novalidate>
+      <p-panel [style]="{'margin-bottom':'20px'}" [showHeader]='false' href="#addForm">
+        <div fxLayout="row" fxLayout.xs="column" fxFill fxLayoutAlign="space-between none">
+          <div fxFlex="190px" fxFlex.xs="90px">
+            <div class="upload-icon" fxFlex="90" fxFlex.xs="90px">
+              <app-icon-picker formControlName="icon"></app-icon-picker>
+            </div>
+          </div>
+          <div fxFlex>
+            <div fxLayout="column" fxFill fxLayoutAlign="start none">
+              <app-tss-input [params]='formData.name' [formGroup]="moduleFormGroup"></app-tss-input>
+              <app-tss-textarea [params]='formData.description' [formGroup]="moduleFormGroup"></app-tss-textarea>
+            </div>
+          </div>
+        </div>
+        <p-footer fxFlex style="text-align:center;" fxLayoutAlign="center center" fxLayoutGap="5px">
+          <button type="submit" pButton label="{{buttonLabel}}" class="ui-button"></button>
+          <button type="button" (click)="flagAddModule=!flagAddModule" pButton label="Cancel" class="ui-button-secondary"></button>
+        </p-footer>
+      </p-panel>
+    </form>
+  </div>
+  <div class="module-widget" fxLayout="column" fxLayoutAlign=" stretch" *ngIf="moduleList.length!==0">
+    <div fxLayout="column">
+      <span class="search">
+        <input fxFlex type="text" pInputText placeholder="Search modules" fxLayoutAlign=" stretch" [(ngModel)]="filterargs">
+        <i class="fa fa-search"></i>
+      </span>
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.lt-md="column">
+      <div class="application-module" fxFlex="50%" fxFlex.xs="100%">
+        <span *ngIf="moduleList.length > 0">
+          <ul dnd-sortable-container [sortableData]="moduleList">
+            <li [ngClass]="(activeClassIndex===inx)?'active':''" *ngFor="let module of moduleList; let inx = index" (click)="onModuleSelect(module, inx)"
+              dnd-sortable [sortableIndex]="inx" (onDragSuccess)="reOrder(inx)">
+              <div class="list-widget" fxLayout="column">
+                <div class="list-info" fxLayout="row" fxLayoutAlign="start center">
+                    <span fxFlex="50px" class="first-letter" fxLayoutAlign="center center" *ngIf="!module.icon">{{module.firstChar}}</span> 
+                    <span fxFlex="50px" class="first-letter" fxLayoutAlign="center center" *ngIf="module.icon"><i class="fa {{module.icon}}"></i></span>
+                  <div fxFlex>
+                    <h3 style="-webkit-box-orient: vertical;"><span matTooltip="{{module.name}}" matTooltipPosition="above">{{module.name}}</span></h3>
+                    <p style="-webkit-box-orient: vertical;"><span matTooltip="{{module.description}}" matTooltipPosition="above">{{module.description}}</span></p>
+                  </div>
+                </div>
+                <div class="list-operations" fxLayout="row" fxLayoutAlign="start center" *ngIf="activeClassIndex===inx">
+                  <span fxFlex="33" [routerLink]="[module.name+'/'+module.uid+'/properties']" class="fa fa-eye" matTooltip="View" matTooltipPosition="above" fxLayoutAlign="center center"></span>
+                  <span fxFlex="33" (click)="updateModuleStatus(module, inx)" [ngStyle]="{'color':module.status?'#20b892':''}" class="fa fa-star" matTooltip="Status" matTooltipPosition="above"
+                    fxLayoutAlign="center center"></span>
+                  <span fxFlex="33" (click)="createEditModule(module.uid)" class="fa icon-edit" fxLayoutAlign="center center" matTooltip="Edit" matTooltipPosition="above"></span>
+                  <span fxFlex="33" (click)="deleteModule(module)" class="fa icon-delete" fxLayoutAlign="center center" matTooltip="Delete" matTooltipPosition="above"></span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </span>
+        <span *ngIf="moduleList.length <= 0">
+          <ul>
+            <li><p style="text-align: center;">No module found</p></li>
+          </ul>
+        </span>
+      </div>
+      <div class="details-table-main inner-tabs" fxFlex="50%" fxFlex.xs="100%">
+        <a matTooltip="Add {{activeTabName}}" matTooltipPosition="left" [routerLink]="[module+'/'+uid+'/'+activeTabName]" [queryParams]="{add: true}" class="icon-plus" style="position:absolute;top:0;right:0;"></a>
+        <mat-tab-group (selectedTabChange)="onTabChange($event)" dynamicHeight="true">
+          <mat-tab label="Datasets">
+            <ng-template mat-tab-label>
+              <i class="fa fa-database"></i>
+              <span>Datasets</span>
+            </ng-template>
+            <div class="details-table-widget">
+              <p-table styleClass="details-table" #datasetDt selectionMode="single" [value]="datasetsList" [responsive]="true" [globalFilterFields]="['name']">
+                <ng-template pTemplate="caption">
+                  <div class="table-search">
+                    <i class="fa fa-search"></i>
+                    <input type="text" pInputText size="50" placeholder="Search" (input)="datasetDt.filterGlobal($event.target.value, 'contains')">
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="body" let-detail>
+                  <tr>
+                    <td [routerLink]="[module + '/' + uid + '/' + activeTabName]">
+                      <span class="ellipsis-1" matTooltip="{{detail.name}}" matTooltipPosition="above"><i class="fa {{detail.icon?detail.icon:'fa-th'}}"></i> {{detail.name}}</span>
+                    </td>
+                    <td class="action-icon-td">
+                      <mat-slide-toggle [checked]="detail.status" (change)="updateDataSetStatus(detail, $event)" matTooltip="Status" matTooltipPosition="above"></mat-slide-toggle>
+                    </td>
+                    <td class="action-icon-td">
+                      <a class="fa icon-delete" (click)="deleteDataSet(detail)" matTooltip="Delete" matTooltipPosition="above" ></a>
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns>
+                  <tr>
+                    <td [attr.colspan]="4" class="text-align-center">
+                      No Dataset found
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </mat-tab>
+          <mat-tab label="Pages">
+            <ng-template mat-tab-label>
+              <i class="fa fa-file"></i>
+              <span>Pages</span>
+            </ng-template>
+            <div class="details-table-widget">
+              <p-table styleClass="details-table" #pagedt selectionMode="single" [value]="pagesList" [responsive]="true" [globalFilterFields]="['name']">
+                <ng-template pTemplate="caption">
+                  <div class="table-search">
+                    <i class="fa fa-search"></i>
+                    <input type="text" pInputText size="50" placeholder="Search" (input)="pagedt.filterGlobal($event.target.value, 'contains')">
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="body" let-page>
+                  <tr>
+                    <td [routerLink]="[module + '/' + uid + '/' + activeTabName]">
+                      <span *ngIf="!page.icon"  class="fa fa-th"></span>
+                      <span *ngIf="page.icon"><i class="fa {{page.icon}}"></i></span>
+                      {{page.name}}</td>
+                    <td class="action-icon-td" title="Status">
+                      <mat-slide-toggle [checked]="page.status" (change)="updatePageStatus(page, $event)" matTooltip="Status" matTooltipPosition="above"></mat-slide-toggle>
+                    </td>
+                    <td class="action-icon-td" title="Page">
+                      <a class="fa icon-delete" (click)="deletePage(page)"></a>
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns>
+                  <tr>
+                    <td [attr.colspan]="4" class="text-align-center">
+                      No Pages found
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>            
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</div>
+<p-confirmDialog width="425" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="Cancel" class="ui-button-secondary" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" class="ui-button-success" label="Yes" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>

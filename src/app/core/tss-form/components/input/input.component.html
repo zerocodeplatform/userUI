@@ -1,0 +1,10 @@
+<!-- <div [formGroup]="formGroup">
+    <input pInputText [type]="type" formControlName="{{params.attr}}" placeholder="{{params.alias}}">
+    <app-form-error-messages [control]="formGroup.controls[params.attr]"></app-form-error-messages>
+</div> -->
+<div class="form-field ui-float-label" [formGroup]="formGroup">
+    <input (blur)="onBlur()" *ngIf='!keyFilter' maxlength="160" style="width: 100%" id="{{params.name}}" pInputText [type]="type" formControlName="{{params.name}}">
+    <input *ngIf='keyFilter' type="text" style="width: 100%" id="{{params.name}}" pInputText [pKeyFilter]="keyFilter" formControlName="{{params.name}}">
+    <label for="{{params.name}}">{{params.label}}</label>
+    <app-form-error-messages  [formGroup]="formGroup" [control]="formGroup.controls[params.name]"></app-form-error-messages>
+</div>

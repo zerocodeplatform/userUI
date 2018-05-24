@@ -1,0 +1,87 @@
+<h1>
+  Setup your application in 3 simple steps
+</h1>
+<div class="steps" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between  none">
+  <div fxFlex="30" class="steps-widget active">
+    <h3>Define top level users</h3>
+    <p>These are the main user groups who has the access to the application</p>
+    <span>1</span>
+  </div>
+  <div fxFlex="30" class="steps-widget">
+    <h3>Generate high level modules</h3>
+    <p>These are the main sections of the application that holds all the sub sections and pages</p>
+    <span>2</span>
+  </div>
+  <div fxFlex="30" class="steps-widget">
+    <h3>Choose a theme</h3>
+    <p> choose your applications look and feel from the number of available themes</p>
+    <span>3</span>
+  </div>
+</div>
+<div class="users-widget" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between stretch">
+  <p-panel fxFlex="70" fxFlex.sm="100" fxFlex.xs="100">
+    <p-header>
+      User of the application
+    </p-header>
+    <div class="users-list" fxFlex>
+      <ul fxLayout="column">
+        <li fxLayout="row" fxLayoutAlign="center center" *ngFor="let usertype of userTypes">
+          <div fxFlex="80px" class="users-image">
+            <span>
+              <img class="img-circle" src="assets/images/user.svg" alt="user image" />
+            </span>
+
+          </div>
+          <div fxFlex class="users-type">
+            <h3>{{usertype.name}}</h3>
+            <p>{{usertype.description}}</p>
+          </div>
+          <div fxFlex="30px" class="user-options">
+            <a class="fa fa-ellipsis-v" [matMenuTriggerFor]="userOperations"></a>
+            <mat-menu #userOperations="matMenu" [overlapTrigger]="false">
+              <button mat-menu-item>New User</button>
+              <button mat-menu-item>Import User</button>
+              <button mat-menu-item>Export User</button>
+              <button mat-menu-item>Settings</button>
+              <button mat-menu-item>Rename</button>
+              <button mat-menu-item>Edit</button>
+              <button mat-menu-item>Delete</button>
+            </mat-menu>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </p-panel>
+  <p-panel fxFlex="29" fxFlex.sm="100" fxFlex.xs="100">
+    <p-header>
+      New top level user
+    </p-header>
+    <div class="top-users">
+      <form class="form-custom">
+        <div fxLayout="column" fxLayoutAlign="space-between stretch">
+          <div fxFlex>
+            <label>User</label>
+            <input type="text" size="30" pInputText>
+          </div>
+          <div fxFlex>
+            <label>Description</label>
+            <textarea [rows]="5" pInputTextarea></textarea>
+          </div>
+          <div fxFlex>
+            <label>Add icon to the user</label>
+            <input type="text" size="30" pInputText>
+          </div>
+          <div fxFlex style="text-align:center;">
+            <button [routerLink]="['create']" pButton type="button" label="Create New User Type" class="ui-button-secondary"></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </p-panel>
+</div>
+<p-confirmDialog width="425" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="Cancel" class="ui-button-secondary" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" class="ui-button-success" label="Yes" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>

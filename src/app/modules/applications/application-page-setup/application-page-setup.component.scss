@@ -1,0 +1,102 @@
+@import '../../../config/theme.scss';
+.custom-carousel{
+    a{
+        &.active{
+            border: 1px solid $primary;
+        }
+    }
+}
+.main-templates{
+    border: 1px solid $border-color;
+    margin-top: $margin10;
+    min-height: calc(100vh - 419px);
+    .templates-widget{
+        border: 2px dashed transparent;
+        padding: $padding15;
+        background-color: $white;
+        min-height: calc(100vh - 400px);
+        overflow-x: auto;
+        @media (min-width:1367px) {
+            min-height: calc(100vh - 419px);
+        }
+        &:before,&:after{
+            display: block;
+            clear: both;
+            content: "";
+        }
+        .row-html{
+            width: 100%;
+            height: 56vh;
+            @media (min-width:1367px) {
+                height: 54vh;
+            }
+            display: flex;
+            >div{
+                background-color:  $backgroundColor;
+                border: 1px solid $border-color;
+                display: flex;
+                flex: 1;
+                &:last-child{
+                    margin-left: $margin15;
+                }
+            }
+        }
+        .column-html{
+            height: 56vh;
+            @media (min-width:1367px) {
+                height: 54vh;
+            }
+            display: flex;
+            flex-direction: column;
+            >div{
+                background-color:  $backgroundColor;
+                border: 1px solid $border-color;
+                flex: 1;
+                &:last-child{
+                    margin-top: $margin15;
+                }
+            }
+        }
+        .threeBox-html{
+            display: flex;
+            .row-widget{
+                background-color:  $backgroundColor;
+                border: 1px solid $border-color;
+                width: 50%;
+                height: 56vh;
+                @media (min-width:1367px) {
+                    height: 54vh;
+                }
+                display: flex;
+            }
+            .vertical-boxes{
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+                height: 56vh;
+                @media (min-width:1367px) {
+                    height: 54vh;
+                }
+                margin-left: 15px;
+                .square-box{
+                    background-color: $backgroundColor;
+                    border: 1px solid $border-color;
+                    flex: 1;
+                    &:last-child{
+                        margin-top: 15px;
+                    }
+                }
+            }
+        }
+        &.dnd-drag-enter{
+            border: 2px dashed $primary;
+        }
+    }
+    .dnd-drag-enter,.block-active{
+        border: 2px dashed $primary;
+    }
+}
+
+.ui-sidebar-top {
+    height: auto !important;
+}

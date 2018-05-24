@@ -1,0 +1,72 @@
+<div class="tab-btn">
+  <ul>
+    <li class="add-btn">
+      <a href="javascript:;" [ngClass]="showAddEditRoleForm?'formOpen':''" (click)="addEditFormShowRole('')" matTooltip="{{showAddEditRoleForm?'Close':'Add'}}"
+        matTooltipPosition="left">
+        <i class="icon-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+<div *ngIf="showAddEditRoleForm">
+  <form [formGroup]="userRoleForm" (ngSubmit)="saveRole(userRoleForm.valid, userRoleForm.value)" novalidate>
+    <p-panel [showHeader]='false'>
+      <div fxLayout="row" fxLayout.xs="column" fxFill fxLayoutAlign="space-between none">
+        <div fxFlex="190px" fxFlex.xs="90px">
+          <div class="upload-icon" fxFlex="90" fxFlex.xs="90px">
+            <app-icon-picker formControlName="icon"></app-icon-picker>
+          </div>
+        </div>
+        <div fxFlex>
+          <div fxLayout="column" fxFill fxLayoutAlign="start none">
+            <app-tss-input [params]="formData.name" [formGroup]='userRoleForm'></app-tss-input>
+            <app-tss-select *ngIf="reportToDropdown.length>0" [options]="reportToDropdown" [params]="formData.reportingTo" [formGroup]='userRoleForm'></app-tss-select>
+            <app-tss-textarea [params]="formData.description" [formGroup]='userRoleForm'></app-tss-textarea>
+          </div>
+        </div>
+      </div>
+      <p-footer fxLayoutAlign="center center" fxLayoutGap="5px">
+        <button type="submit" pButton label="{{submitButtonLabel}}" class="ui-button"></button>
+        <button type="button" pButton label="CANCEL" class="ui-button-secondary" (click)="showAddEditRoleForm=false"></button>
+      </p-footer>
+    </p-panel>
+  </form>
+  <app-language-config *ngIf='languageUrl' [url]='languageUrl'></app-language-config>
+</div>
+<p-table #dt styleClass="role-table" [value]="roles" [responsive]="true" [globalFilterFields]="['name', 'parentRole', 'description']">
+  <ng-template pTemplate="caption">
+    <div class="table-search">
+      <i class="fa fa-search"></i>
+      <input type="text" pInputText size="50" placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')">
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns="cols">
+    <tr>
+        <th *ngFor="let col of cols">{{col.header}}</th>
+        <th colspan="3" class="action-icon-th">Actions</th>
+    </tr>  
+  </ng-template>
+  <ng-template pTemplate="body" let-role>
+    <tr>
+      <td><i class="fa {{role.icon}}"></i>    <span matTooltip="{{role.name}}" matTooltipPosition="above">{{role.name}}</span></td>
+      <td><span matTooltip="{{role['reportingTo']?.label || '--'}}" matTooltipPosition="above">{{role['reportingTo']?.label}}</span></td>
+      <td><p matTooltip="{{role.description}}" matTooltipPosition="above">{{role.description}}</p></td>
+      <td class="action-icon-td">
+        <mat-slide-toggle  [checked]="role.status" (change)="updateRoleStatus(role, $event)" matTooltip="Status" matTooltipPosition="above"></mat-slide-toggle>
+      </td>
+      <td class="action-icon-td">
+        <a class="fa fa-edit" (click)="addEditFormShowRole(role.uid)" matTooltip="Edit" matTooltipPosition="above"></a>
+      </td>
+      <td class="action-icon-td">
+        <a class="fa fa-trash" (click)="deleteRole(role)" matTooltip="Delete" matTooltipPosition="above"></a>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage" let-columns>
+    <tr>
+      <td [attr.colspan]="cols.length+3" class="text-align-center">
+        No Roles found
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

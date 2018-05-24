@@ -1,0 +1,11 @@
+<img [src]="options.url"  (click)="openModal()" [width]="options.width" [height]="options.height" onError="this.src='https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/painting_landscape.png'"
+/>
+
+<p-dialog minWidth="350" autoZIndex=true baseZIndex="999999" appendTo="body" header="Image List" [(visible)]="display">
+  <div class="ui-g" >
+    <div class="ui-g-3" style="padding: 10px" (click)="chooseImage(img)" *ngFor="let img of imageList">
+      <img width="100" height="auto" [src]="img.img.src">
+    </div>
+  </div>
+
+</p-dialog>

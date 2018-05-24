@@ -1,0 +1,68 @@
+<div class="tab-btn">
+  <ul>
+    <li class="add-btn" (click)="addEditPage('');">
+      <a class="" href="javascript:;" [ngClass]="flagAddpage?'formOpen':''">
+        <i class="icon-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+<div *ngIf="flagAddpage">
+  <form [formGroup]="pageFormGroup" (ngSubmit)="createUdpatePage(pageFormGroup.value,pageFormGroup.valid)" novalidate>
+    <p-panel [style]="{'margin-bottom':'20px'}" [showHeader]='false' href="#addForm">
+      <div fxLayout="row" fxLayout.xs="column" fxFill fxLayoutAlign="space-between none">
+        <div fxFlex="190px" fxFlex.xs="90px">
+          <div class="upload-icon" fxFlex="90" fxFlex.xs="90px">
+            <app-icon-picker formControlName="icon"></app-icon-picker>
+          </div>
+        </div>
+        <div fxFlex>
+          <div fxLayout="column" fxFill fxLayoutAlign="start none">
+            <app-tss-input [params]="formData.name" [formGroup]="pageFormGroup"></app-tss-input>
+            <app-tss-select [options]="layoutOptions" [params]="formData.masterPage" [formGroup]='pageFormGroup'></app-tss-select>
+            <app-tss-textarea [params]="formData.description" [formGroup]="pageFormGroup"></app-tss-textarea>
+          </div>
+        </div>
+      </div>
+      <p-footer fxFlex style="text-align:center;" fxLayoutAlign="center center" fxLayoutGap="5px">
+        <button type="submit" pButton label="{{buttonLabel}}" class="ui-button"></button>
+        <button type="button" (click)="flagAddpage=!flagAddpage" pButton label="Cancel" class="ui-button-secondary"></button>
+      </p-footer>
+    </p-panel>
+  </form>
+</div>
+<div class="datasets-widget">
+  <p-table #dt selectionMode="single" styleClass="page-table" [value]="pagesList" [responsive]="true" [globalFilterFields]="['name']">
+    <ng-template pTemplate="caption">
+      <div class="table-search">
+        <i class="fa fa-search"></i>
+        <input type="text" pInputText size="50" placeholder="Search..." (input)="dt.filterGlobal($event.target.value, 'contains')">
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns="cols">
+      <tr>
+          <th *ngFor="let col of cols"  [pSortableColumn]="col.field">
+              {{col.header}}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+          <th colspan="4" class="action-icon-th">Actions</th>
+      </tr>  
+    </ng-template>    
+    <ng-template pTemplate="body" let-page>
+      <tr >
+        <td (click)="onRowSelect(page)"><i class="fa {{page.icon}}"></i>  <span matTooltip="{{page.name}}" matTooltipPosition="above">{{page.name}}</span></td>
+        <td (click)="onRowSelect(page)"><p matTooltip="{{page.description}}" matTooltipPosition="above">{{page.description}}</p></td> 
+        <td class="action-icon-td"><mat-slide-toggle  [checked]="page.status" (change)="updatePageStatus(page, $event)" matTooltip="Status" matTooltipPosition="above"></mat-slide-toggle></td>
+        <td class="action-icon-td" matTooltip="Edit" matTooltipPosition="above"><a class="fa fa-edit" (click)="addEditPage(page.uid);"></a></td>
+        <td class="action-icon-td" matTooltip="Delete" matTooltipPosition="above"><a class="fa fa-trash" (click)="deletePage(page);"></a></td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+          <td [attr.colspan]="cols.length+3" class="text-align-center">
+              No pages found
+          </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

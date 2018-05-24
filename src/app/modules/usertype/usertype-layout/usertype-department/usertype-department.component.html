@@ -1,0 +1,65 @@
+<div class="tab-btn" (click)="addEditDepartment('');">
+  <ul>
+    <li class="add-btn">
+      <a href="javascript:;" [ngClass]="addDepartmentModule?'formOpen':''">
+        <i class="icon-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+<div *ngIf="addDepartmentModule">
+  <form [formGroup]="userTypeDepartmentForm" (ngSubmit)="createOrUpdateDepartment(userTypeDepartmentForm.value)" novalidate>
+    <p-panel [showHeader]='false' [showHeader]='false'>
+      <div fxLayout="row" fxLayout.xs="column" fxFill fxLayoutAlign="space-between none">
+        <div fxFlex="190px" fxFlex.xs="90px">
+          <div class="upload-icon" fxFlex="90" fxFlex.xs="90px">
+            <app-icon-picker formControlName="icon"></app-icon-picker>
+          </div>
+        </div>
+        <div fxFlex>
+          <div fxLayout="column" fxFill fxLayoutAlign="start none">
+            <app-tss-input [params]="formData.name" [formGroup]='userTypeDepartmentForm'></app-tss-input>
+            <app-tss-textarea [params]="formData.description" [formGroup]='userTypeDepartmentForm'></app-tss-textarea>
+          </div>
+        </div>
+      </div>
+      <p-footer fxLayoutAlign="center center" fxLayoutGap="5px">
+        <button type="submit" pButton label="{{submitButtonLabel}}" class="ui-button"></button>
+        <button type="button" pButton label="CANCEL" (click)="addDepartmentModule=!addDepartmentModule" class="ui-button-secondary"></button>
+      </p-footer>
+    </p-panel>
+  </form>
+</div>
+<app-language-config *ngIf='languageUrl' [url]='languageUrl'></app-language-config>
+<p-table #dt styleClass="department-table" [value]="departments" [responsive]="true"  [globalFilterFields]="['name','description']">
+  <ng-template pTemplate="caption">
+    <div  class="table-search">
+      <i class="fa fa-search"></i>
+      <input type="text" pInputText size="50" placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')">
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns="cols">
+    <tr>
+        <th *ngFor="let col of cols">
+            {{col.header}}
+        </th>
+        <th colspan="3" class="action-icon-th">Actions</th>
+    </tr>  
+  </ng-template>
+  <ng-template pTemplate="body" let-department>
+    <tr>
+      <td><i class="fa {{department.icon}}"></i>  <span matTooltip="{{department.name}}" matTooltipPosition="above">{{department.name}}</span></td>
+      <td><p>{{department.description}}</p></td>
+      <td class="action-icon-td"><mat-slide-toggle [checked]="department.status" (change)="updateDepartmentStatus(department, $event)" matTooltip="Status" matTooltipPosition="above"></mat-slide-toggle></td>
+      <td class="action-icon-td"><a class="fa fa-edit" (click)="addEditDepartment(department.uid);" matTooltip="Edit" matTooltipPosition="above"></a></td>
+      <td class="action-icon-td"><a class="fa fa-trash" (click)="deleteDepartment(department);" matTooltip="Delete" matTooltipPosition="above"></a></td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage" let-columns>
+    <tr>
+        <td [attr.colspan]="cols.length+3" class="text-align-center">
+            No departments found
+        </td>
+    </tr>
+  </ng-template>
+</p-table>

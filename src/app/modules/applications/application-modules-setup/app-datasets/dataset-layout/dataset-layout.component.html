@@ -1,0 +1,31 @@
+<div class="appModule-setup">
+  <mat-tab-group [(selectedIndex)]="activeTabIndex" (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="">
+      <ng-template mat-tab-label>
+        <i class="fa icon-properties"></i>
+        <span>Properties</span>
+      </ng-template>
+      <app-dataset-properties [applicationName]="urlParams.applicationName"
+        [applicationUid]="urlParams.applicationUid"
+        [datasetName]="urlParams.datasetName"
+        [datasetType]="urlParams.datasetType"
+        [datasetUid]="urlParams.datasetUid"
+        [module]="urlParams.module"
+        [moduleUid]="urlParams.moduleUid"></app-dataset-properties>
+    </mat-tab>
+    <mat-tab label="">
+      <ng-template mat-tab-label>
+        <i class="fa icon-fields"></i>
+        <span>Fields</span>
+      </ng-template>
+      <app-dataset-fields></app-dataset-fields>
+    </mat-tab>
+    <mat-tab label="">
+      <ng-template mat-tab-label>
+        <i class="fa fa-language"></i>
+        <span>Language</span>
+      </ng-template>
+      <app-language-config *ngIf='languageUrl' [url]='languageUrl'></app-language-config>
+    </mat-tab>
+  </mat-tab-group>
+</div>

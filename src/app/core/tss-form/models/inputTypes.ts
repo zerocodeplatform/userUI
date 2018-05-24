@@ -1,0 +1,42 @@
+export class InputTypes {
+    TEXT = 'Text';
+    TEXT_AREA = 'Text Area';
+    DATE = 'Date';
+    BOOLEAN = 'Boolean';
+    NUMBER = 'Number';
+    CHOOSE = 'Choose';
+    RELATION = 'Relation';
+    /*Derived Data Type*/
+    ATTACHMENT = 'Attachment';
+    RANGE = 'Range';
+    ASSIGNED_TO = 'Assigned To';
+    GEO_MAP = 'Geo Map';
+    CURRENCY = 'Currency';
+    SEQUENCE_IDENTIFIER = 'Sequence Identifier';
+    RADIO = 'Radio';
+    ONOFF_SWITCH = 'Switch';
+    CHECKBOX = 'Checkbox';
+    LOOKUP = 'Lookup';
+    AUTOCOMPLETE = 'Autocomplete';
+    DROPDOWN = 'Dropdown';
+    IMAGE = 'Image';
+    FILE = 'File';
+    EMAIL = 'Email';
+    SKYPE = 'Skype';
+    PHONE = 'Phone';
+    URL = 'Url';
+    PASSWORD = 'Password';
+    HTML = 'Html';
+    TIME = 'Time';
+    DATE_TIME = 'Date Time';
+    INTEGER = 'Integer';
+    FRACTION = 'Fraction';
+    SINGLE = 'Single';
+    MULTIPLE = 'Multiple';
+    ONE_TO_ONE = 'One To One';
+    ONE_TO_MANY = 'One To Many';
+    MANY_TO_ONE = 'Many To One';
+    MANY_TO_MANY = 'Many To Many';
+    LAT_LANG = 'Lat Lang';
+    KML_SHAPE = 'KML Shape';
+}

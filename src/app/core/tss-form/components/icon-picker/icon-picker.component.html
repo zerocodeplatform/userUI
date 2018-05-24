@@ -1,0 +1,43 @@
+<div class="upload-icon">
+    <div class="app-icon-picker">
+        <button type="button" pTooltip="Select Icon" title="Select Icon" tooltipPosition="top" (click)="popoverIcon.toggle($event)"
+            pButton icon="{{value || 'fa-sitemap'}}" [ngClass]="(value)?'selectedIcon':''"></button>
+        <button pButton class="ui-button-danger" pTooltip="Delete Icon" title="Delete Icon" tooltipPosition="top" *ngIf='value' icon="fa-trash"
+            (click)="value=null"></button>
+    </div>
+</div>
+<p-overlayPanel #popoverIcon [showCloseIcon]="true" appendTo="body">
+    <div style="max-width: 450px;">
+
+        <!-- <div style="height: 250px;overflow: auto;">
+            <div *ngFor="let fontIcon of iconsList ">
+                <h2>{{fontIcon.fontName}} </h2>
+                <div class="ui-g">
+                    <div class="ui-g-2 p5" *ngFor="let icon of fontIcon.list | filterBy: searchKey">
+                        <i (click)="selectedIcon(popoverIcon,$event,icon)" title="{{icon.label}}" class="fa {{icon.icon}}"
+                           style="font-size: 32px;cursor:pointer;"></i>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="icon_picker_tabs">
+            <div *ngFor="let fontIcon of iconsList">
+                {{fontIcon.fontName}}
+                <div class="ui-g" style="height: 250px;overflow: auto;" *ngIf="fontIcon.list">
+                    <div class="ui-g-2 p5" *ngFor="let icon of fontIcon.list">
+                        <i (click)="selectedIcon(popoverIcon,$event,icon)" title="{{icon.label}}" class="fa {{icon.icon}}" style="font-size: 32px;cursor:pointer;"></i>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <mat-tab-group>
+            <mat-tab *ngFor="let fontIcon of iconsList" label="{{fontIcon.fontName}}">
+                <div class="ui-g" style="height: 250px;overflow: auto;" *ngIf="fontIcon.list">
+                    <div class="ui-g-2 p5" *ngFor="let icon of fontIcon.list">
+                        <i (click)="selectedIcon(popoverIcon,$event,icon)" title="{{icon.label}}" class="fa {{icon.icon}}" style="font-size: 32px;cursor:pointer;"></i>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</p-overlayPanel>

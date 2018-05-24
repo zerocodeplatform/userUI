@@ -1,0 +1,2 @@
+<ng-template *ngIf='options' dynamic-template [context]='{options:options}' [template]="(data.type=='html')?options.template:template"
+    [lazyModules]="lazyModules">

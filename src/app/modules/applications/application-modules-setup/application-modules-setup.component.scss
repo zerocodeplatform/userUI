@@ -1,0 +1,19 @@
+@import '../../../config/theme.scss';
+.appModule-setup{
+    margin-bottom: $margin15;
+    .operations-table{
+        margin-top: 10px;
+        &.ui-table .ui-table-thead > tr > th{
+            background: $white !important;
+        }
+        td{
+            width: 50px;
+            text-align: center;
+            color: $colorDefault2;
+            &:first-child{
+                width: auto;
+                text-align: left;
+            }
+        }
+    }
+}

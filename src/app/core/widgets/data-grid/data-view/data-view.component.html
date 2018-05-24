@@ -1,0 +1,13 @@
+
+<p-dataList [value]="rows">
+  <ng-template let-row pTemplate="item">
+    <div class="ui-g-12 ui-md-9 car-details">
+      <div class="ui-g">
+          <div class="ui-g-2 ui-sm-6">Number: </div>
+          <div class="ui-g-10 ui-sm-6">{{row.number}}</div>
+          <div class="ui-g-2 ui-sm-6">Name: </div>
+          <div class="ui-g-10 ui-sm-6">{{row.name}}</div>
+      </div>
+  </div>
+  </ng-template>
+</p-dataList>

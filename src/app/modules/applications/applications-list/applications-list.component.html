@@ -1,0 +1,70 @@
+<div class="p-contain">
+  <div class="head-btn">
+    <ul>
+      <li class="add-btn" (click)="addEditApplication(0);" *ngIf="applicationList.length!==0">
+        <a class="" href="javascript:;" [ngClass]="addAppFlag?'formOpen':''" matTooltip="{{addAppFlag?'Close':'Add'}}" matTooltipPosition="left">
+          <i class="icon-plus"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="no-record" *ngIf="applicationList.length===0">
+    Create your first application.
+  </div>
+  <div *ngIf="addAppFlag">
+    <!-- #target -->
+    <form [formGroup]="createApp" (ngSubmit)="saveUpdateApp(createApp.value,createApp.valid)" novalidate>
+      <p-panel [style]="{'margin-bottom':'20px'}" [showHeader]='false' href="#addForm">
+        <div fxLayout="row" fxLayout.xs="column" fxFill fxLayoutAlign="space-between none">
+          <div fxFlex="190px" fxFlex.xs="90px">
+            <div class="upload-icon" fxFlex="90" fxFlex.xs="90px">
+              <app-icon-picker formControlName="icon"></app-icon-picker>
+            </div>
+          </div>
+          <div fxFlex>
+            <div fxLayout="column" fxFill fxLayoutAlign="space-between none">
+              <app-tss-input [params]='formData.name' [formGroup]="createApp"></app-tss-input>
+              <app-tss-input [params]='formData.url' [formGroup]="createApp"></app-tss-input>
+              <app-tss-textarea [params]='formData.description' [formGroup]="createApp"></app-tss-textarea>
+            </div>
+          </div>
+        </div>
+        <p-footer fxFlex style="text-align:center;" fxLayoutAlign="center center" fxLayoutGap="5px">
+          <button type="submit" pButton label="{{buttonLabel}}" class="ui-button"></button>
+          <button type="button" (click)="addAppFlag=!addAppFlag" pButton label="Cancel" class="ui-button-secondary"></button>
+        </p-footer>
+      </p-panel>
+    </form>
+  </div>
+
+  <div class="applications-list">
+    <ul fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" fxLayoutWrap dnd-sortable-container [sortableData]="applicationList">
+      <li [ngClass]="(activeClassIndex===inx)?'active':''" fxFlex="50%" fxFlex.xs="100%" *ngFor="let app of applicationList; let inx = index"
+        (click)="activeClassIndex=inx" dnd-sortable [sortableIndex]="inx" (onDragSuccess)="reOrder(inx)">
+        <div class="list-widget" fxLayout="column">
+          <div class="list-info" fxLayout="row" fxLayoutAlign="start center">
+            <span fxFlex="100px" fxFlex.xs="60px" class="fa {{((app.icon)?app.icon:'fa-question-circle')}} left-icon" fxLayoutAlign="center center"></span>
+            <div fxFlex>
+              <h3 style="-webkit-box-orient: vertical;"><span [routerLink]="[app.name+'/'+app.uid]" matTooltip="{{app.name}}" matTooltipPosition="above">{{app.name}}</span></h3>
+              <p style="-webkit-box-orient: vertical;" matTooltip="{{app.description}}" matTooltipPosition="above">{{app.description}}</p>
+            </div>
+          </div>
+          <div class="list-operations" fxLayout="row" fxLayoutAlign="start center">
+            <span fxFlex="33" [routerLink]="[app.name+'/'+app.uid]" class="fa fa-eye" fxLayoutAlign="center center" matTooltip="View" matTooltipPosition="above"></span>
+            <span fxFlex="33" (click)="updateAppStatus(app, inx)" class="fa fa-star" fxLayoutAlign="center center" [ngStyle]="{'color':app.status?'#10b1dc':''}"  matTooltip="Status" matTooltipPosition="above"></span>
+            <span fxFlex="33" (click)="addEditApplication(app.uid)" class="fa icon-edit" fxLayoutAlign="center center"  matTooltip="Edit" matTooltipPosition="above"></span>
+            <!-- scrollTo(target); -->
+            <span fxFlex="33" (click)="onDelete(app)" class="fa icon-delete" fxLayoutAlign="center center"  matTooltip="Delete" matTooltipPosition="above"></span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<p-confirmDialog width="425" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="Cancel" class="ui-button-secondary" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" class="ui-button-success" label="Yes" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>

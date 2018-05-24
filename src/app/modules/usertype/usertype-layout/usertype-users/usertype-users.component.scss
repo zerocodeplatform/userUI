@@ -1,0 +1,18 @@
+@import '../../../../config/theme.scss';
+.user-table{
+    .ui-table-caption{
+        padding:$padding0;
+        border: $borderNone;
+    }
+    th{
+        &:nth-of-type(3),&:nth-of-type(4),&:nth-of-type(5){
+            width: 90px;
+        }
+    }
+    td{
+        color: $colorDefault2;        
+    }
+}
+.action-icon-th{
+    width: 12em; 
+}

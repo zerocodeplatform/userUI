@@ -1,0 +1,140 @@
+@import '../../../config/theme.scss';
+.module-widget{
+    background-color:$white;
+    .application-module{
+        border-right: 1px solid $border-color;
+        ul{
+            li{
+                .list-widget{
+                    background-color: #f9f9f9;
+                    border: 1px solid $border-color;
+                    border-right: $borderNone;
+                    border-top: $borderNone;
+                    cursor: pointer;
+                    .list-info{
+                        padding: $padding5 $padding5 $padding5 $padding0;
+                        .first-letter{
+                            font-size: $fontSizeLarge;
+                            width: $w-50;
+                            height:$h-50;
+                            border-radius: 50%;
+                            text-align: center;
+                            line-height: 50px;
+                            background-color: #bfbfbf;
+                            margin: $margin10;
+                            font-weight: $bold;
+                            color:$white;
+                            i{
+                                font-size: $fontSizeXL + 2px;
+                            }
+                        }
+                        h3{
+                            // color: $primary;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical !important;
+                            -webkit-line-clamp: 1;
+                            overflow: hidden;
+                            // font-weight: $semi-bold;
+                            @media(max-width:599px){
+                                font-size: $fontSizeLarge;
+                            }
+                        }
+                        p{
+                            display: -webkit-box;
+                            -moz-box-orient: vertical;
+                            -webkit-box-orient: vertical !important;
+                            -webkit-line-clamp:3;
+                            overflow: hidden;
+                            min-height: 54px;
+                        }
+                    }
+                    .list-operations{
+                        padding: $padding5 $padding10;
+                        font-size: 18px;
+                        border-top:1px solid $border-color;
+                        span{
+                            border-right: 1px solid $border-color;
+                            cursor: pointer;
+                            outline: none;
+                            &:last-child{
+                                border-right: $borderNone;
+                            }
+                        }
+                    }
+                }
+                &:nth-of-type(even){
+                    .list-widget{
+                        background-color: $white;
+                    }
+                }
+                &:nth-of-type(odd){
+                    .list-widget{
+                        background-color: #f9f9f9;
+                    }
+                }
+                &.active,&:hover{
+                    .list-widget{
+                        background-color: #f4fafa;
+                        .list-info{
+                            .first-letter{
+                                background-color: $primary;
+                            }
+                            h3{
+                                color: $primary;
+                            }
+                        }
+                    }
+                   
+                }
+            }
+        }
+        
+    }
+    .details-table-main{
+        border-right: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+        border-top: 2px solid transparent;
+        position: relative;
+        >a{
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 14px;
+            z-index: 2;
+            color: #7f7f7f;
+        }
+        .details-table-widget{
+            .details-table{
+                .ui-table-caption{
+                    padding:$padding0;
+                    border: $borderNone;
+                }
+                td{
+                    width: 50px;
+                    text-align: center;
+                    color: $colorDefault2;
+                    &:first-child{
+                        width: auto;
+                        text-align: left;
+                        span{
+                            padding-right: $padding5;
+                        }
+                    }
+                }
+            }
+        }
+    }   
+}
+
+td{
+    width: 50px;
+    text-align: center;
+    color: $colorDefault2;
+    &:first-child{
+        width: auto;
+        text-align: left;
+        span{
+            padding-right: $padding5;
+        }
+    }
+}

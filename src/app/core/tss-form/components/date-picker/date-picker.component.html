@@ -1,0 +1,5 @@
+<div  class="calendar-container ui-float-label" [formGroup]="formGroup" fxLayout="column" fxLayoutAlign="start stretch">
+    <p-calendar (onSelect)='onSelect($event)'  [utc]='true' [showTime]="true"  [name]='params.name' [style]="{'width':'100%'}" placeholder="&nbsp;" formControlName="{{params.name}}"></p-calendar>
+    <label for="{{params.name}}">{{params.label}}</label>
+    <app-form-error-messages  [formGroup]="formGroup" [control]="formGroup.controls[params.name]"></app-form-error-messages>
+</div>

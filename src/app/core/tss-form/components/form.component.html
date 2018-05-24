@@ -1,0 +1,30 @@
+<form *ngIf="formData" (submit)="onSubmit(formGroup.value)" [formGroup]="formGroup">
+  <div class="form-contain" fxLayout="row" fxLayoutWrap>
+    <div [fxFlex]="FieldWidth" [ngStyle]="{'display': param.hidden?'none':'block'}" class="form-group" *ngFor="let param of formData">
+      <div *ngIf="!param.hidden">
+        <app-tss-input *ngIf="param.type == inputTypes.TEXT" [params]="param" [formGroup]="formGroup"></app-tss-input>
+        <app-tss-textarea *ngIf="param.type == inputTypes.TEXT_AREA" [params]="param" [formGroup]="formGroup"></app-tss-textarea>
+        <app-tss-checkbox *ngIf="param.type == inputTypes.CHECKBOX" [params]="param" [formGroup]="formGroup" [ngStyle]='param.style'></app-tss-checkbox>
+        <!-- <app-dy-checkbox-list *ngIf="getType(param.type) == 'checkbox-list'" [params]="param" [formGroup]="form"></app-dy-checkbox-list> -->
+
+
+        <app-tss-date *ngIf="getType(param.type) == 'date-picker'" [params]="param" [formGroup]="formGroup"></app-tss-date>
+        <app-tss-slide-toggle *ngIf="param.type == inputTypes.BOOLEAN" [params]="param" [formGroup]="formGroup"></app-tss-slide-toggle>
+        <app-tss-input keyFilter='int' *ngIf="param.type == inputTypes.NUMBER" [params]="param" [formGroup]="formGroup"></app-tss-input>
+        <app-tss-radio *ngIf="param.type == inputTypes.RADIO" [params]="param" [formGroup]="formGroup"></app-tss-radio>
+        <!-- <app-dy-radio-list *ngIf="getType(param.type) == 'radio-list'" [params]="param" [formGroup]="form"></app-dy-radio-list> -->
+        <div *ngIf="param.type == inputTypes.CHOOSE">
+          <app-tss-select *ngIf="param.settings.style == inputTypes.DROPDOWN && param.settings.type == inputTypes.SINGLE" [options]='param.options'
+            [params]="param" [formGroup]="formGroup"></app-tss-select>
+          <app-multi-select *ngIf="param.settings.type == inputTypes.MULTIPLE" [options]='param.options' [params]="param" [formGroup]="formGroup"></app-multi-select>
+          <app-tss-radio *ngIf="param.settings.style == inputTypes.RADIO && param.settings.type == inputTypes.SINGLE" [params]="param"
+            [formGroup]="formGroup"></app-tss-radio>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+      <ng-content></ng-content>
+    <p-button *ngIf='submitBtn' type="submit" label="Submit"></p-button>
+  </div>
+</form>

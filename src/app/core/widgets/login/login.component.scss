@@ -1,0 +1,68 @@
+.form-page{
+    color: #72848c;
+    font-size: 18px;
+    form{
+        margin:0px auto; 
+        padding: 10px;
+        h1{
+            color: #323232;
+            margin-top:0px;
+            margin-bottom: 50px;
+            @media(max-width:768px){
+                font-size: 24px;
+                padding: 0px;
+            }
+            &.logo{
+                border-bottom: 1px solid #cbcbcb;
+                padding-bottom: 10px;
+            }
+        }
+        .form-field{
+            margin-bottom: 30px;
+            input{
+                @media(max-width:768px){
+                    margin-left:0px;
+                }
+                &.ui-inputtext{
+                    padding: 15px;
+                    width: 100%;
+                }
+            }
+            .help-block{
+                color: #f00;
+                bottom: -20px;
+                font-size: 16px;
+                text-align: right;
+            }
+        }
+        a{
+            color: #14b7d9;
+        }
+        .ui-chkbox-box{
+            border-radius: 6px;
+            &.ui-state-active{
+                background-color: #14b7d9;
+                border: 1px solid #14b7d9;
+            }
+            .ui-chkbox-icon{
+                font-size: 12px;
+                line-height: 18px;
+            }
+        }
+        .ui-button{
+            
+            padding: 6px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        .forgt-rem-div{
+            margin: 0px 0px 15px 0px;
+        }
+    }
+    .ui-float-label>input.ui-state-filled ~ label{
+        font-size: 18px;
+    }
+    .ui-float-label > input:focus ~ label{
+        font-size: 18px; 
+    }
+}

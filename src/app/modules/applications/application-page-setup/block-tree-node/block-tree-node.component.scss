@@ -1,0 +1,42 @@
+.setting,.c-setting{
+    display: none;
+    padding: 2px;
+    position: absolute;
+    right: 0;
+    top:0;
+    background-color: red;
+    i{
+        margin-left: 5px;
+    }
+}
+.c-setting{
+    left: 0;
+    right: auto;
+}
+.trash{
+    padding: 0px;
+    position: absolute;
+    right: 20;
+    top:0;
+}
+.blockDiv:hover,.componentDiv:hover{
+    border: 2px dashed green;
+    .setting,.c-setting{
+        display: inherit;
+        z-index: 9999;
+    }
+}
+.componentDiv{
+   background-color: aquamarine;
+    padding: 5px;
+    position: relative;
+}
+.blockDiv{
+    background-color: bisque;
+    padding: 5px;
+    position: relative;
+    min-height: calc(100vh - 430px);
+    @media (min-width:1367px) {
+        min-height: calc(100vh - 450px);
+    }
+}

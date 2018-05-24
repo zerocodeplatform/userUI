@@ -1,0 +1,16 @@
+@import '../../../config/theme.scss';
+ul{
+    li{
+        display: inline;
+        a{
+            padding: $padding10;
+            color: $main-color;
+            &.active{
+                color: $primary;
+            }
+        }
+    }
+}
+.ui-content{
+    padding: $padding10;
+}

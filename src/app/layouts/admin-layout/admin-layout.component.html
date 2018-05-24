@@ -1,0 +1,83 @@
+<div fxLayout="column" fxFill fxLayoutAlign=" stretch">
+  <header fxFlex="55px" fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxFlex="250px" fxLayout="row" fxFlex.xs="100" class="header-leftside" fxLayoutGap="30px" fxLayoutAlign="start center">
+      <a href="javascript:;" class="fa fa-bars sidebar-toggle" appSidebarToggle (click)="toggleMenu()" matTooltip="Click to toggle Menu" matTooltipPosition="right"></a>
+      <a class="logo">
+        <img src="assets/images/logo.png" alt="Logo">
+      </a>
+    </div>
+    <div fxFlex class="header-rightside">
+      <ul fxLayout="row" fxLayoutAlign="space-between center">
+        <li>
+          <a [routerLink]="['/admin/account']" class="fa icon-settings"  matTooltip="Account Setup" matTooltipPosition="left"></a>
+        </li>
+        <li class="user-menu">
+          <a href="javascript:;" [matMenuTriggerFor]="profileMenu" class="fa icon-profile">
+            <!-- <img src="assets/images/user.png" alt=""> -->
+          </a>
+          <mat-menu #profileMenu="matMenu" [overlapTrigger]="false">
+            <button mat-menu-item (click)="logout()"> <i class="fa fa-sign-out"></i> LOGOUT</button>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <div class="main-body" fxFlex>
+    <div class="breadcrumb-widget">
+      <mc-breadcrumbs></mc-breadcrumbs>
+    </div>
+    <div class="container">  <!--[@flyInOut]="state"-->
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <footer fxFlex="60px" fxLayoutAlign="center center">
+    <div class="footer-center">
+      <a class="rights" href="http://www.thresholdsoft.com/">Threshold Software Solutions Pvt Ltd</a>, All Rights Reserved © 2018
+      <span class="powerby" fxHide.xs="true">
+        <span>Powered by</span>
+        <img src="assets/images/logo.png" alt="poweredBy">
+      </span>
+    </div>
+  </footer>
+</div>
+<div class="side-menu">
+  <ul class="nav">
+    <li class="nav-item nav-dropdown" [class.nav-dropdown]="m.sub" appNavDropdown *ngFor="let m of menu"> <!--(click)="addAnimation()"-->
+      <a *ngIf="m.sub" class="nav-link nav-dropdown-toggle" routerLinkActive="active" appNavDropdownToggle matTooltip="{{m.name}}" matTooltipPosition="right">
+        <i class="fa {{m.icon}}"></i>
+        <span class="nav-link-text">{{m.name}}</span>
+        <!-- <span class="fa fa-angle-right dp-arrow"></span> -->
+      </a>
+      <a routerLink="{{m.link}}" *ngIf="!m.sub" routerLinkActive="active" class="nav-link" appNavDropdownToggle matTooltip="{{m.name}}" matTooltipPosition="right">
+        <i class="fa {{m.icon}}"></i>
+        <span class="nav-link-text">{{m.name}}</span>
+      </a>
+      <ul class="nav-dropdown-items" *ngIf="m.sub">
+        <li class="nav-item nav-dropdown" [class.nav-dropdown]="s.sub" appNavDropdown *ngFor="let s of m.sub">
+          <a *ngIf="s.sub" class="nav-link nav-dropdown-toggle" routerLinkActive="active" appNavDropdownToggle>
+            <i class="fa {{s.icon}}"></i>
+            <span class="nav-link-text">{{s.name}}</span>
+            <!-- <span class="fa fa-angle-right dp-arrow"></span> -->
+          </a>
+          <a *ngIf="!s.sub" routerLink="{{s.link}}" class="nav-link" routerLinkActive="active" appNavDropdownToggle>
+            <i class="fa {{s.icon}}"></i>
+            <span>{{s.name}}</span>
+          </a>
+          <ul class="nav-dropdown-items" *ngIf="s.sub">
+            <li class="nav-item nav-dropdown" [class.nav-dropdown]="ss.sub" *ngFor="let ss of s.sub">
+              <a *ngIf="ss.sub" class="nav-link nav-dropdown-toggle" routerLinkActive="active">
+                <i class="fa {{ss.icon}}"></i>
+                <span class="nav-link-text">{{ss.name}}</span>
+                <!-- <span class="fa fa-angle-right dp-arrow"></span> -->
+              </a>
+              <a *ngIf="!ss.sub" routerLink="{{ss.link}}" class="nav-link" routerLinkActive="active">
+                <i class="fa {{ss.icon}}"></i>
+                <span class="nav-link-text">{{ss.name}}</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

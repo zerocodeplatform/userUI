@@ -1,0 +1,242 @@
+<div class="tab-btn">
+  <ul>
+    <li class="add-btn">
+      <a class="">
+        <i class="icon-plus"></i>
+      </a>
+    </li>
+    <!-- <li>
+      <a class="view-btn">
+        <i class="fa fa-eye"></i>
+      </a>
+    </li> -->
+  </ul>
+</div>
+<div class="fields-widget" fxLayout="row" fxLayoutAlign="start start" fxLayoutWrap>
+  <div class="fields-elements" fxFlex="183px" fxFill fxLayout="column">
+    <ul fxLayout="row" fxLayoutAlign="start stretch" fxLayoutWrap>
+      <li *ngFor="let fieldType of fieldTypes" pDraggable="availableTypes" (onDragStart)="dragStart($event,fieldType)" (onDragEnd)="dragEnd($event)">
+        <a>
+          <i class="fa {{fieldType.icon}}"></i> {{fieldType.label}}</a>
+      </li>
+      <!-- <li>
+        <a>
+          <i class="fa fa-sort-alpha-up"></i> Single Line Text</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-paragraph"></i> Paragraph Text</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-list-ol"></i> Number</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-check-square"></i> Checkboxes</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-circle"></i> Multiple Choice</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-caret-down"></i> Dropdown</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-caret-down"></i> Multiple Select</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-upload"></i> File Upload</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-square"></i> Button</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-user"></i> Name</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-address-book"></i> Address</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-at"></i> Email</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-mobile"></i> Phone</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-globe"></i> Web Site</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-search"></i> Auto Complete</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-calendar"></i> Date</a>
+      </li>
+      <li>
+        <a>
+          <i class="fa fa-calendar"></i> Time</a>
+      </li> -->
+    </ul>
+  </div>
+  <div class="basic-info-fields" fxFlex fxLayout="row" fxLayoutGap="1px" fxLayoutAlign="start stretch">
+    <div fxFlex="50" fxLayout="column" fxFill fxLayoutAlign="space-between stretch">
+      <ul class="entity-list" fxLayout="column" fxLayoutAlign="start stretch">
+        <li class="active">
+          <div class="entity-widget" fxLayout="row" fxLayoutAlign="start center">
+            <a fxFlex="30px" class="fa fa-text-height"></a>
+            <span fxFlex class="">Entity Name</span>
+            <span fxFlex="100px" class="mandatory">Mandatory</span>
+            <a fxFlex="40px" class="fa fa-pencil"></a>
+            <a fxFlex="40px" class="fa fa-trash"></a>
+          </div>
+        </li>
+        <li class="">
+          <div class="entity-widget" fxLayout="row" fxLayoutAlign="start center">
+            <a fxFlex="30px" class="fa fa-address-book"></a>
+            <span fxFlex class="">Entity Name</span>
+            <span fxFlex="100px" class="mandatory">Mandatory</span>
+            <a fxFlex="40px" class="fa fa-pencil"></a>
+            <a fxFlex="40px" class="fa fa-trash"></a>
+          </div>
+        </li>
+        <li class="">
+          <div class="entity-widget" fxLayout="row" fxLayoutAlign="start center">
+            <a fxFlex="30px" class="fa fa-paragraph"></a>
+            <span fxFlex class="">Entity Name</span>
+            <span fxFlex="100px" class="mandatory">Mandatory</span>
+            <a fxFlex="40px" class="fa fa-pencil"></a>
+            <a fxFlex="40px" class="fa fa-trash"></a>
+          </div>
+        </li>
+        <li class="">
+          <div class="entity-widget" fxLayout="row" fxLayoutAlign="start center">
+            <a fxFlex="30px" class="fa fa-list-ol"></a>
+            <span fxFlex class="">Entity Name</span>
+            <span fxFlex="100px" class="mandatory">Mandatory</span>
+            <a fxFlex="40px" class="fa fa-pencil"></a>
+            <a fxFlex="40px" class="fa fa-trash"></a>
+          </div>
+        </li>
+        <li class="">
+          <div class="entity-widget" fxLayout="row" fxLayoutAlign="start center">
+            <a fxFlex="30px" class="fa fa-check-square"></a>
+            <span fxFlex class="">Entity Name</span>
+            <span fxFlex="100px" class="mandatory">Mandatory</span>
+            <a fxFlex="40px" class="fa fa-pencil"></a>
+            <a fxFlex="40px" class="fa fa-trash"></a>
+          </div>
+        </li>
+        <li class="">
+          <div class="entity-widget" fxLayout="row" fxLayoutAlign="start center">
+            <a fxFlex="30px" class="fa fa-circle"></a>
+            <span fxFlex class="">Entity Name</span>
+            <span fxFlex="100px" class="mandatory">Mandatory</span>
+            <a fxFlex="40px" class="fa fa-pencil"></a>
+            <a fxFlex="40px" class="fa fa-trash"></a>
+          </div>
+        </li>
+        <li class="">
+          <div class="entity-widget" fxLayout="row" fxLayoutAlign="start center">
+            <a fxFlex="30px" class="fa fa-caret-down"></a>
+            <span fxFlex class="">Entity Name</span>
+            <span fxFlex="100px" class="mandatory">Mandatory</span>
+            <a fxFlex="40px" class="fa fa-pencil"></a>
+            <a fxFlex="40px" class="fa fa-trash"></a>
+          </div>
+        </li>
+        <li class="">
+          <div class="entity-widget" fxLayout="row" fxLayoutAlign="start center">
+            <a fxFlex="30px" class="fa fa-address-book"></a>
+            <span fxFlex class="">Entity Name</span>
+            <span fxFlex="100px" class="mandatory">Mandatory</span>
+            <a fxFlex="40px" class="fa fa-pencil"></a>
+            <a fxFlex="40px" class="fa fa-trash"></a>
+          </div>
+        </li>
+        <li class="">
+          <div class="entity-widget" fxLayout="row" fxLayoutAlign="start center">
+            <a fxFlex="30px" class="fa fa-upload"></a>
+            <span fxFlex class="">Entity Name</span>
+            <span fxFlex="100px" class="mandatory">Mandatory</span>
+            <a fxFlex="40px" class="fa fa-pencil"></a>
+            <a fxFlex="40px" class="fa fa-trash"></a>
+          </div>
+        </li>
+        <li class="">
+          <div class="entity-widget" fxLayout="row" fxLayoutAlign="start center">
+            <a fxFlex="30px" class="fa fa-square"></a>
+            <span fxFlex class="">Entity Name</span>
+            <span fxFlex="100px" class="mandatory">Mandatory</span>
+            <a fxFlex="40px" class="fa fa-pencil"></a>
+            <a fxFlex="40px" class="fa fa-trash"></a>
+          </div>
+        </li>
+        <li class="">
+          <div class="entity-widget" fxLayout="row" fxLayoutAlign="start center">
+            <a fxFlex="30px" class="fa fa-user"></a>
+            <span fxFlex class="">Entity Name</span>
+            <span fxFlex="100px" class="mandatory">Mandatory</span>
+            <a fxFlex="40px" class="fa fa-pencil"></a>
+            <a fxFlex="40px" class="fa fa-trash"></a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div fxFlex="50" fxFill class="fields-form-widget">
+      <div class="fields-form" fxLayout="column" fxFill fxLayoutAlign="space-between stretch">
+        <p-panel fxFlex [showHeader]="false" styleClass="noBorder-pannel">
+          <div [formGroup]="createBasicForm" fxLayout="column" fxLayoutWrap>
+            <div class="flex-p active">
+              <app-tss-input [params]='formBasic.name' [formGroup]="createBasicForm"></app-tss-input>
+            </div>
+            <div class="flex-p">
+              <app-tss-input [params]='formBasic.entity' [formGroup]="createBasicForm"></app-tss-input>
+            </div>
+            <div class="flex-p">
+              <app-tss-input [params]='formBasic.size' [formGroup]="createBasicForm"></app-tss-input>
+            </div>
+            <div class="flex-p">
+              <app-tss-slide-toggle [params]="formBasic.defaultvalue" [formGroup]="createBasicForm"></app-tss-slide-toggle>
+            </div>
+            <div class="flex-p" fxFlex="">
+              <app-tss-textarea [params]='formBasic.patterns' [formGroup]="createBasicForm"></app-tss-textarea>
+            </div>
+            <div class="flex-p" fxFlex="">
+              <app-tss-textarea [params]='formBasic.description' [formGroup]="createBasicForm"></app-tss-textarea>
+            </div>
+            <div class="flex-p">
+              <app-tss-slide-toggle [params]="formBasic.multilanguage" [formGroup]="createBasicForm"></app-tss-slide-toggle>
+            </div>
+          </div>
+          <p-footer fxLayoutAlign="center center" fxLayoutGap="5px">
+            <button type="button" pButton label="CREATE"></button>
+            <button type="button" pButton label="CANCEL" class="ui-button-secondary"></button>
+          </p-footer>
+        </p-panel>
+      </div>
+    </div>
+  </div>
+  <p-overlayPanel styleClass="no-padding" #op1 appendTo="body">
+    <p-panel styleClass="white-tabs white-panel" [showHeader]="false">
+      <mat-tab-group>
+        <mat-tab label="Properties">Content 1</mat-tab>
+        <mat-tab label="Access Permissions">Content 2</mat-tab>
+        <mat-tab label="Rules">Content 3</mat-tab>
+      </mat-tab-group>
+      <p-footer fxLayoutAlign="center center" fxLayoutGap="5px">
+        <button type="button" pButton label="CREATE"></button>
+        <button type="button" pButton label="CANCEL" class="ui-button-secondary"></button>
+      </p-footer>
+    </p-panel>
+  </p-overlayPanel>

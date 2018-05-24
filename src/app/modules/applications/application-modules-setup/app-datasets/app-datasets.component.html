@@ -1,0 +1,85 @@
+<div class="tab-btn">
+  <ul>
+    <li class="add-btn" (click)="addEditDataset('');">
+      <a class="" href="javascript:;" [ngClass]="flagAddDataset?'formOpen':''" matTooltip="{{flagAddDataset?'Close':'Add'}}" matTooltipPosition="left">
+        <i class="fa icon-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+<div *ngIf="flagAddDataset">
+  <!-- <form [formGroup]="datasetFormGroup" (ngSubmit)="createOrUpdateDataset(datasetFormGroup.value,datasetFormGroup.valid)" novalidate>
+    <p-panel [style]="{'margin-bottom':'20px'}" [showHeader]='false' href="#addForm">
+      <div fxLayout="row" fxLayout.xs="column" fxFill fxLayoutAlign="space-between none">
+        <div fxFlex="190px" fxFlex.xs="90px">
+          <div class="upload-icon" fxFlex="90" fxFlex.xs="90px">
+            <app-icon-picker formControlName="icon"></app-icon-picker>
+          </div>
+        </div>
+        <div fxFlex>
+          <div fxLayout="column" fxFill fxLayoutAlign="start none">
+            <app-tss-input [params]='formData.name' [formGroup]="datasetFormGroup"></app-tss-input>
+            <app-tss-input *ngIf="buttonLabel === 'Create'" [params]='formData.entityName' [formGroup]="datasetFormGroup"></app-tss-input>
+            <app-tss-textarea [params]='formData.description' [formGroup]="datasetFormGroup"></app-tss-textarea>
+          </div>
+        </div>
+      </div>
+      <p-footer fxFlex style="text-align:center;" fxLayoutAlign="center center" fxLayoutGap="5px">
+        <button type="submit" pButton label="{{buttonLabel}}" class="ui-button"></button>
+        <button type="button" (click)="flagAddDataset=!flagAddDataset" pButton label="Cancel" class="ui-button-secondary"></button>
+      </p-footer>
+    </p-panel>
+  </form> -->
+  <app-dataset-properties 
+        [datasetUid]="datasetUid"
+        [applicationName]="urlParams.applicationName"
+        [applicationUid]="urlParams.applicationUid"
+        [datasetName]="'0'"
+        [datasetType]="'0'"
+        [module]="urlParams.module"
+        [moduleUid]="urlParams.moduleUid"
+        (afterSave)="afterSaveCallback($event)"></app-dataset-properties>
+</div>
+<div class="datasets-widget">
+  <p-table #dt selectionMode="single" styleClass="datasets-table" [value]="datasetsList" [responsive]="true" [globalFilterFields]="['name', 'description']">
+    <ng-template pTemplate="caption">
+      <div class="table-search">
+        <i class="fa fa-search"></i>
+        <input type="text" pInputText size="50" placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')">
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns="cols">
+      <tr>
+          <th *ngFor="let col of cols"  [pSortableColumn]="col.field">
+              {{col.header}}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+          <th colspan="3" class="action-icon-th">Actions</th>
+      </tr>  
+    </ng-template>
+    <ng-template pTemplate="body" let-detail>
+      <tr>
+        <td (click)="onRowSelect(detail)">
+          <span class="ellipsis-2" matTooltip="{{detail.name}}" matTooltipPosition="above"><i class="fa {{detail.icon?detail.icon:'fa-th'}}"></i> {{detail.name}}</span>
+        </td>
+        <td><p (click)="onRowSelect(detail)" matTooltip="{{detail.description}}" matTooltipPosition="above">{{detail.description}}</p></td>
+        <td class="action-icon-td">
+          <mat-slide-toggle [checked]="detail.status" matTooltip="Change Status" matTooltipPosition="above" (change)="updateDataSetStatus(detail, $event)"></mat-slide-toggle>
+        </td>
+        <td class="action-icon-td">
+          <a class="fa fa-edit" (click)="addEditDataset(detail.uid);" matTooltip="Edit" matTooltipPosition="above"></a>
+        </td>
+        <td class="action-icon-td">
+          <a class="fa fa-trash" (click)="deleteDataSet(detail)" matTooltip="Delete" matTooltipPosition="above"></a>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+          <td colspan="5" class="text-align-center">
+              No Dataset found
+          </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

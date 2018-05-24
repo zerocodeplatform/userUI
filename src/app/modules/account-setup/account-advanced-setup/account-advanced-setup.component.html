@@ -1,0 +1,13 @@
+<p-panel [showHeader]='false'>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" fxLayoutGap="10px">
+    <!-- <div fxFlex="auto" fxLayout="column" fxLayoutAlign="space-between stretch">
+      <label>Label 1</label>
+      <input type="text" pInputText placeholder="Field 1">
+    </div>
+    <div fxFlex="auto" fxLayout="column" fxLayoutAlign="space-between stretch">
+      <label>Label 2</label>
+      <input type="text" pInputText placeholder="Field 2">
+    </div> -->
+    <app-dy-form [formData]='formData' (output)='submit($event)'></app-dy-form>
+  </div>
+</p-panel>

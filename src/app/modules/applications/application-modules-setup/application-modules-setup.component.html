@@ -1,0 +1,47 @@
+<!-- <div class="tab-btn">
+  <ul>
+    <li class="add-btn" >
+      <a class="formOpen" (click)="gotoLink()" matTooltip="Close" matTooltipPosition="left">
+        <i class="icon-plus"></i>
+      </a>
+    </li>
+  </ul>
+</div> -->
+<div class="appModule-setup">
+  <mat-tab-group [(selectedIndex)]="activeTabIndex" (selectedTabChange)="onTabChange($event)" dynamicHeight="true">
+    <mat-tab label="Properties">
+      <ng-template mat-tab-label>
+        <i class="icon-properties"></i>
+        <span>Properties</span>
+      </ng-template>
+      <app-module-properties *ngIf="activeTabIndex===0"></app-module-properties>
+    </mat-tab>
+    <mat-tab label="Datasets">
+      <ng-template mat-tab-label>
+        <i class="fa fa-database"></i>
+        <span>Datasets</span>
+      </ng-template>
+      <app-datasets [moduleUid]="urlParams.moduleUid" *ngIf="activeTabIndex===1"></app-datasets>
+    </mat-tab>
+    <mat-tab label="Pages">
+      <ng-template mat-tab-label>
+        <i class="fa fa-file"></i>
+        <span>Pages</span>
+      </ng-template>
+      <app-module-pages [moduleUid]="urlParams.moduleUid" *ngIf="activeTabIndex===2"></app-module-pages>
+    </mat-tab>
+    <mat-tab label="Language" >
+      <ng-template mat-tab-label>
+        <i class="fa fa-language"></i>
+        <span>Language</span>
+      </ng-template>
+      <app-language-config *ngIf='languageUrl && activeTabIndex===3' [url]='languageUrl'></app-language-config>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<p-confirmDialog width="425" #cd>
+  <p-footer>
+    <button type="button" pButton icon="fa-close" label="Cancel" class="ui-button-secondary" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="fa-check" class="ui-button-success" label="Yes" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>

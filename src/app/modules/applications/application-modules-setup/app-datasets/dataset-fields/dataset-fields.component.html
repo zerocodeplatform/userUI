@@ -1,0 +1,67 @@
+<div class="tab-btn">
+  <ul>
+    <li class="add-btn">
+      <a class="">
+        <i class="icon-plus"></i>
+      </a>
+    </li>
+    <!-- <li>
+      <a class="view-btn">
+        <i class="fa fa-eye"></i>
+      </a>
+    </li> -->
+  </ul>
+</div>
+<div class="fields-widget" fxLayout="row" fxFill fxLayoutAlign="start stretch" fxLayoutWrap>
+  <div class="fields-elements" fxFlex="183px" fxLayout="column">
+    <ul class="customScroll" fxLayout="row" fxLayoutAlign="start stretch" fxLayoutWrap>
+      <li *ngFor="let fieldType of availableFieldTypes" pDraggable="availableFieldTypes" (onDragStart)="dragStart($event,fieldType)"
+        (onDragEnd)="dragEnd($event)">
+        <a>
+          <i class="fa {{fieldType.icon}}"></i> {{fieldType.label}}</a>
+      </li>
+    </ul>
+  </div>
+  <div fxFlex fxLayout="column" fxLayoutGap="1px" fxLayoutAlign="start stretch">
+    <div class="basic-info-fields" fxFlex fxLayout="row" fxLayoutAlign="start stretch">
+      <div class="fields-elements-list customScroll" fxFlex="50" fxLayout="column" fxLayoutAlign="space-between stretch" pDroppable="availableFieldTypes"
+        (onDrop)="drop($event)" [ngClass]="{'ui-state-highlight':draggedFieldType}">
+        <!-- {{selectedFieldTypes | json}} -->
+        <ul class="entity-list" fxFill fxLayout="column" fxLayoutAlign="start stretch">
+          <!-- [ngClass]="{'active':selectedFieldType.index==activeFieldType.index}" -->
+          <li (click)='clickFieldType(selectedFieldType,false)' [ngClass]="{'active':selectedFieldType.index==activeFieldType.index}"
+            *ngFor="let selectedFieldType of selectedFieldTypes">
+            <div class="entity-widget" [ngClass]="{'error-entity':!selectedFieldType.formValid}" fxLayout="row" fxLayoutAlign="start center">
+              <a fxFlex="30px" class="fa {{selectedFieldType.type.icon}}"></a>
+              <span fxFlex class="">{{selectedFieldType.model?.name || selectedFieldType.type.label}}</span>
+              <span fxFlex="100px" class="mandatory" *ngIf="selectedFieldType.model?.required">Mandatory</span>
+              <a fxFlex="40px" class="icon-edit"></a>
+              <a fxFlex="40px" class="icon-delete"></a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div fxFlex="50" *ngIf='activeFieldType && showForm' class="fields-form-widget customScroll">
+        <div class="fields-form" fxLayout="column" fxFill fxLayoutAlign="space-between stretch">
+          {{activeFieldType.model | json}}
+          <p-panel fxFlex [showHeader]="false" styleClass="noBorder-pannel">
+            <form [formGroup]="activeFieldType.fieldTypeFormGroup">
+              <formly-form (modelChange)="modelChange()" [model]="activeFieldType.model" [fields]="activeFieldType.fieldTypeFields" [options]="options"
+                [form]="activeFieldType.fieldTypeFormGroup">
+              </formly-form>
+            </form>
+            <div *ngIf="activeFieldType.model.language">
+              <app-language-config [showSubmitBtn]='false' layoutStyle="vertical" [languageData]='activeFieldType.languageData' *ngIf="activeFieldType.languageData && activeFieldType.languageData.languages.length > 0"
+                [lazy]='false'></app-language-config>
+            </div>
+          </p-panel>
+        </div>
+      </div>
+    </div>
+    <div fxFlex="40px" fxLayout="row" fxLayoutAlign="center center">
+      <p-footer fxLayoutAlign="center center" fxLayoutGap="5px" *ngIf='selectedFieldTypes.length>0'>
+        <button type="button" pButton label="Save" (click)='saveFields()'></button>
+      </p-footer>
+    </div>
+  </div>
+</div>

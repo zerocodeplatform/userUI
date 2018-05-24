@@ -1,0 +1,5 @@
+<p-growl [(value)]="msgs"></p-growl><router-outlet></router-outlet>
+<div *ngIf="loading" class="loader" style="color:red">
+        <p-progressSpinner [style]="{width: '100px', height: '100px'}" strokeWidth="4" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
+</div>
+

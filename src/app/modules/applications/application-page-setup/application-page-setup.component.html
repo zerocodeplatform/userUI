@@ -1,0 +1,174 @@
+<div class="appPage-setup">
+  <mat-tab-group dynamicHeight="true">
+    <mat-tab label="Elements">
+      <ng-template mat-tab-label>
+        <i class="icon-fields"></i>
+        <span>Elements</span>
+      </ng-template>
+      <p-panel styleClass="noBorder-pannel light-tabs-Panel" [showHeader]='false'>
+        <div class="light-tabs">
+          <mat-tab-group dynamicHeight="true">
+            <mat-tab label="Blocks">
+              <ng-template mat-tab-label>
+                <span>Blocks</span>
+              </ng-template>
+              <p-carousel styleClass="custom-carousel" numVisible="8" [value]="blocks">
+                <ng-template let-block pTemplate="item">
+                  <div class="ui-grid ui-grid-responsive" dnd-draggable [dragEnabled]="true" [dragData]="block">
+                    <a [ngClass]="(selectedTemplate == block.id)?'active':''">
+                      <img src="assets/images/{{block.image}}.png" alt="image">
+                    </a>
+                  </div>
+                </ng-template>
+              </p-carousel>
+            </mat-tab>
+            <mat-tab label="Widgets">
+              <ng-template mat-tab-label>
+                <span>Widgets</span>
+              </ng-template>
+              <p-carousel styleClass="custom-carousel" numVisible="8" [value]="widgets">
+                <ng-template let-widget pTemplate="item">
+                  <div class="ui-grid ui-grid-responsive" dnd-draggable [dragEnabled]="true" [dragData]="widget">
+                    <div style="padding: 25px">{{widget.widgetName}}</div>
+                  </div>
+                </ng-template>
+              </p-carousel>
+            </mat-tab>
+            <!-- <mat-tab label="Datasets">
+              <ng-template mat-tab-label>
+                <span>Datasets</span>
+              </ng-template>
+              <p-carousel styleClass="custom-carousel" numVisible="8" [value]="datasets">
+                <ng-template let-dataset pTemplate="item">
+                  <div class="ui-grid ui-grid-responsive" dnd-draggable [dragEnabled]="true" [dragData]="dataset">
+                    <a [ngClass]="(selectedTemplate == dataset.id)?'active':''">
+                      <img src="assets/images/{{dataset.image}}.png" alt="image">
+                    </a>
+                  </div>
+                </ng-template>
+              </p-carousel>
+            </mat-tab>
+            <mat-tab label="Form Elements">
+              <ng-template mat-tab-label>
+                <span>Form Elements</span>
+              </ng-template>
+              <p-carousel styleClass="custom-carousel" numVisible="8" [value]="formElements">
+                <ng-template let-formElement pTemplate="item">
+                  <div class="ui-grid ui-grid-responsive" dnd-draggable [dragEnabled]="true" [dragData]="formElement">
+                    <a [ngClass]="(selectedTemplate == formElement.id)?'active':''">
+                      <img src="assets/images/{{formElement.image}}.png" alt="image">
+                    </a>
+                  </div>
+                </ng-template>
+              </p-carousel>
+            </mat-tab>
+            <mat-tab label="Grids & Tables">
+              <ng-template mat-tab-label>
+                <span>Grids & Tables</span>
+              </ng-template>
+              <p-carousel styleClass="custom-carousel" numVisible="9" [value]="gridTables">
+                <ng-template let-gridTable pTemplate="item">
+                  <div class="ui-grid ui-grid-responsive" dnd-draggable [dragEnabled]="true" [dragData]="gridTable">
+                    <a [ngClass]="(selectedTemplate == gridTable.id)?'active':''">
+                      <i class="icon-{{gridTable.icon}}"></i>
+                    </a>
+                  </div>
+                </ng-template>
+              </p-carousel>
+            </mat-tab>
+            <mat-tab label="Charts & Graphs">
+              <ng-template mat-tab-label>
+                <span>Charts & Graphs</span>
+              </ng-template>
+              <p-carousel styleClass="custom-carousel" numVisible="9" [value]="chartsGraphs">
+                <ng-template let-chartsGraph pTemplate="item">
+                  <div class="ui-grid ui-grid-responsive" dnd-draggable [dragEnabled]="true" [dragData]="chartsGraph">
+                    <a [ngClass]="(selectedTemplate == chartsGraph.id)?'active':''">
+                      <img src="assets/images/{{chartsGraph.image}}.png" alt="image">
+                    </a>
+                  </div>
+                </ng-template>
+              </p-carousel>
+            </mat-tab>
+            <mat-tab label="Navigation">
+              <ng-template mat-tab-label>
+                <span>Navigation</span>
+              </ng-template>
+              <p-carousel styleClass="custom-carousel" numVisible="9" [value]="navigations">
+                <ng-template let-navigation pTemplate="item">
+                  <div class="ui-grid ui-grid-responsive" dnd-draggable [dragEnabled]="true" [dragData]="navigation">
+                    <a [ngClass]="(selectedTemplate == navigation.id)?'active':''">
+                      <img src="assets/images/{{navigation.image}}.png" alt="image">
+                    </a>
+                  </div>
+                </ng-template>
+              </p-carousel>
+            </mat-tab>
+            <mat-tab label="Headers & Footers">
+              <ng-template mat-tab-label>
+                <span>Headers & Footers</span>
+              </ng-template>
+              <p-carousel styleClass="custom-carousel" numVisible="9" [value]="headerFooters">
+                <ng-template let-headerFooter pTemplate="item">
+                  <div class="ui-grid ui-grid-responsive" dnd-draggable [dragEnabled]="true" [dragData]="headerFooter">
+                    <a [ngClass]="(selectedTemplate == headerFooter.id)?'active':''">
+                      <img src="assets/images/{{headerFooter.image}}.png" alt="image">
+                    </a>
+                  </div>
+                </ng-template>
+              </p-carousel>
+            </mat-tab>
+            <mat-tab label="Others">
+              <ng-template mat-tab-label>
+                <span>Others</span>
+              </ng-template>
+              <p-carousel styleClass="custom-carousel" numVisible="9" [value]="others">
+                <ng-template let-other pTemplate="item">
+                  <div class="ui-grid ui-grid-responsive" dnd-draggable [dragEnabled]="true" [dragData]="other">
+                    <a [ngClass]="(selectedTemplate == other.id)?'active':''">
+                      <img src="assets/images/{{other.image}}.png" alt="image">
+                    </a>
+                  </div>
+                </ng-template>
+              </p-carousel>
+            </mat-tab> -->
+          </mat-tab-group>
+          <div class="main-templates">
+            <button class="ui-button  ui-state-default  ui-button-text-only" (click)="pageSave()">
+              <span class="ui-button-text">Save</span>
+            </button>
+            <div class="templates-widget drop-here" dnd-droppable (onDropSuccess)="onDropSuccess($event)">
+              <app-block-tree-node [pageBlocks]="pageBlocks"></app-block-tree-node>
+            </div>
+          </div>
+        </div>
+      </p-panel>
+
+    </mat-tab>
+    <!-- <mat-tab label="Properties">
+      <ng-template mat-tab-label>
+        <i class="icon-properties"></i>
+        <span>Properties</span>
+      </ng-template>
+      Properties
+    </mat-tab>
+
+    <mat-tab label="Rules">
+      <ng-template mat-tab-label>
+        <i class="fa fa-file"></i>
+        <span>Rules</span>
+      </ng-template>
+      Rules
+    </mat-tab>
+    <mat-tab label="Workflows">
+      <ng-template mat-tab-label>
+        <i class="icon-modules"></i>
+        <span>Workflows</span>
+      </ng-template>
+      Workflow
+    </mat-tab> -->
+  </mat-tab-group>
+</div>
+<p-sidebar [(visible)]="visibleSidebar" position="top" [baseZIndex]="10000">
+  <app-block-widget-option *ngIf="visibleSidebar" [data]="blockData"></app-block-widget-option>
+</p-sidebar>

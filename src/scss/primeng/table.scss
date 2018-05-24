@@ -1,0 +1,75 @@
+@import '../../app/config/theme.scss';
+.ui-table{
+    font-family: $main-font;
+    .ui-table-thead>tr>th{
+        color: $main-color;
+        padding: .45em .5em;
+        font-weight: $semi-bold;
+    }
+    .ui-table-tbody > tr{
+        color: $main-color;
+        >td{
+            p{
+                display: -webkit-box;
+                -moz-box-orient: vertical;
+                -webkit-box-orient: vertical !important;
+                -webkit-line-clamp:2;
+                overflow: hidden;
+                text-align: left;
+                // min-height: 54px;
+            }
+        }
+    }
+} 
+.ui-table-caption{
+    padding: $padding0;
+    border: $borderNone;
+    .table-search{
+        position: relative;
+        i{
+            color: $main-color;
+            margin:4px 4px 0 0;
+            position:absolute;
+            right:5px;
+            top:5px;
+        }
+        input{
+            width:100%;
+            padding: 7px 25px 7px 7px;
+            // border-bottom:none;
+        }
+    }
+}
+.roles-table{
+    &.ui-table{
+        border: none;
+        th{
+            color:#333333 !important;
+            font-size: $fontSizeLarge;
+            &:last-child{
+                border-left: $borderNone;
+            }
+        }
+        td{
+            color: $main-color;
+            &:last-child{
+                border-left: $borderNone;
+            }
+            a{
+                color: $main-color;
+                padding: $padding5 $padding10;
+            }
+        }
+    }
+    &.no-borders{
+        padding: $padding10;
+    }
+    
+}
+.language-table{
+    &.ui-table .ui-table-tbody > tr > td {
+        padding: $padding10;
+        vertical-align: top;
+        word-wrap: break-word;
+    }
+}

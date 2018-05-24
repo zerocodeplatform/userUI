@@ -1,0 +1,33 @@
+@import '../../../../config/theme.scss';
+.datasets-widget{
+    // padding: $padding15;
+    .datasets-table{
+        .ui-table-caption{
+            padding:$padding0;
+            border: $borderNone;
+        }
+        th{
+            &:nth-of-type(1){
+                width: 250px;
+            }
+            &:nth-of-type(3){
+                width: 170px;
+            }
+        }
+        td{
+            width: 50px;
+            text-align: center;
+            color: $colorDefault2;
+            &:first-child{
+                width: auto;
+                text-align: left;
+                span{
+                    padding-right: $padding5;
+                }
+            }
+        }
+    }
+}
+.action-icon-th{
+    width: 13em; 
+}

@@ -1,0 +1,5 @@
+<div class="form-field ui-float-label" [formGroup]="formGroup">
+    <textarea maxlength="1025" [rows]="rows" [cols]="cols"  style="width: 100%" id="{{params.name}}" pInputTextarea  formControlName="{{params.name}}"></textarea>
+    <label for="{{params.name}}">{{params.label}}</label>
+    <app-form-error-messages [control]="formGroup.controls[params.name]"></app-form-error-messages>
+</div>

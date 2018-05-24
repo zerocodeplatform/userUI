@@ -1,0 +1,65 @@
+.steps{
+    margin: 20px 0;
+    .steps-widget{
+        padding: 10px;
+        background-color: #f8f9fb;
+        border: 1px solid #e6e9ee;
+        border-radius: 5px;
+        position: relative;
+        cursor: pointer;
+        @media(max-width:959px){
+            margin-bottom: 10px;
+        }
+        &.active,&:hover{
+            background-color: #fff;
+        }
+        span{
+            position: absolute;
+            width: 30px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            text-align: center;
+            height: 30px;
+            border-radius: 50%;
+            line-height: 30px;
+            top: -15px;
+            right: 20px;
+        }
+        
+    }
+}
+.users-widget{
+    .users-list{
+        ul{
+            li{
+                border-bottom:1px solid #e5e5e5;
+                padding: 10px 0px;
+                &:last-child{
+                    border-bottom:none;
+                }
+                .users-image{
+                    text-align: center;
+                    padding-right: 10px;
+                    span{
+                        img{
+                            padding: 15px;
+                            background-color: #f2f2f2;
+                        }
+                    }
+                }
+                .user-options{
+                    text-align: center;
+                    a{
+                        color: #72848c;
+                        display: block;
+                        font-size: 24px;
+                    }
+                    
+                }
+            }
+        }
+    }
+}
+p-panel{
+    margin-bottom: 15px;
+}
